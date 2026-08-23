@@ -23,3 +23,12 @@ override the corresponding empty customization files from the parent.
 This is a migration scaffold, not a finished storefront. Do not enable it on a
 production shop until the P0 checks in [MIGRATION.md](MIGRATION.md) pass in a
 staging environment.
+
+## Current coverage
+
+- Customer authentication, registration and password reset inherit current
+  PrestaShop 8.2 templates and receive scoped B2B styling.
+- The product page inherits current price, combination, stock, MOQ and
+  add-to-cart contracts and receives scoped responsive styling.
+- Cart, checkout, global navigation, catalogue listings and module-specific
+  presentation are still pending migration.

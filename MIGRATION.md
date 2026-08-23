@@ -19,7 +19,7 @@ reference.
 | Registration | `templates/customer/registration.tpl` and `_partials/customer-form.tpl` | Inherit Classic; the legacy copies contain no confirmed B2B-only fields | inherited |
 | Authentication | `templates/customer/authentication.tpl` and `_partials/login-form.tpl` | Inherit the current flow; apply visual changes through scoped CSS | inherited |
 | Password reset | `templates/customer/password-*.tpl` | Inherit the PrestaShop 8.2 password policy, constraints and feedback | inherited |
-| Product page | `templates/catalog/product.tpl` and product partials | Inventory B2B price, stock, MOQ and add-to-cart behavior before overriding | pending |
+| Product page | `templates/catalog/product.tpl` and product partials | Inherit Classic presenter contracts; style price, stock, MOQ, combinations and add-to-cart with scoped CSS | inherited |
 | Cart | `templates/checkout/cart.tpl` and cart partials | Start from Classic; port only confirmed B2B totals and quantity UI | pending |
 | Checkout | `templates/checkout/checkout.tpl` and `checkout/_partials/steps/*` | Keep current address, shipping, payment and terms contracts | pending |
 | Order confirmation | `templates/checkout/order-confirmation.tpl` | Keep current hooks and payment-module output | pending |
@@ -40,6 +40,15 @@ Customer-flow audit note: the legacy authentication and registration templates
 are outdated copies of Classic and do not contain project-specific B2B fields.
 They are intentionally not copied into v2. Runtime smoke tests remain required
 before these rows can be marked `verified`.
+
+Product-flow audit note: the legacy product templates contain no custom B2B
+price calculation. Group-specific prices, combination quantities, availability
+and minimum order quantities remain owned by PrestaShop 8.2. The old explicit
+`displayCountdown`, `displayStCompareButton` and `displayStWishlistButton` hooks
+are intentionally not copied. Current `displayProductActions`,
+`displayProductAdditionalInfo`, `displayReassurance` and `displayFooterProduct`
+hooks remain available through Classic. Runtime combination and cart tests are
+still required before this row can be marked `verified`.
 
 ## P1: global layout and navigation
 
