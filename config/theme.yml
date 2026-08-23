@@ -1,0 +1,13 @@
+parent: classic
+
+name: b2b_mriya_v2
+display_name: B2B Mriya v2
+version: 0.1.0
+
+author:
+  name: "Mykhailo Kulyk"
+  email: "info@profisite.com.ua"
+  url: "https://b2b-mriya.com.ua"
+
+assets:
+  use_parent_assets: true

@@ -1,0 +1,221 @@
+/**
+ * B2B Mriya v2 custom styles.
+ *
+ * The base styles are inherited from the PrestaShop 8.2 Classic theme.
+ * Move only intentional project-specific rules into this file. Do not copy
+ * the legacy Bootstrap, Font Awesome, or vendor bundles from b2b_mriya.
+ */
+
+:root {
+  --b2b-primary: #e31118;
+  --b2b-primary-hover: #b90d13;
+  --b2b-secondary: #272729;
+  --b2b-surface: #ffffff;
+  --b2b-surface-muted: #f8f9fa;
+  --b2b-border: #dfe3e8;
+  --b2b-text-muted: #62666c;
+  --b2b-focus: rgba(227, 17, 24, 0.22);
+}
+
+/*
+ * Customer access flows
+ *
+ * These rules are deliberately page-scoped. Registration, authentication and
+ * password reset keep the current Classic markup and PrestaShop 8 behavior.
+ */
+body#authentication,
+body#registration,
+body#password {
+  color: var(--b2b-secondary);
+  background: var(--b2b-surface-muted);
+}
+
+body#authentication #main,
+body#registration #main,
+body#password #main {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+body#authentication #main {
+  max-width: 720px;
+}
+
+body#registration #main {
+  max-width: 920px;
+}
+
+body#password #main {
+  max-width: 820px;
+}
+
+body#authentication #main .page-header,
+body#registration #main .page-header,
+body#password #main .page-header {
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+body#authentication #main .page-header h1,
+body#registration #main .page-header h1,
+body#password #main .page-header h1 {
+  margin-bottom: 0;
+  color: var(--b2b-secondary);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.25;
+  text-transform: none;
+}
+
+body#authentication #main .page-content,
+body#registration #main .page-content,
+body#password #main .page-content {
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  background: var(--b2b-surface);
+  border: 1px solid var(--b2b-border);
+  box-shadow: 0 12px 30px rgba(39, 39, 41, 0.08);
+}
+
+body#authentication #main .form-group,
+body#registration #main .form-group,
+body#password #main .form-group {
+  margin-bottom: 1.125rem;
+}
+
+body#authentication #main .form-control-label,
+body#registration #main .form-control-label,
+body#password #main .form-control-label {
+  padding-top: 0.65rem;
+  color: var(--b2b-secondary);
+  font-weight: 600;
+}
+
+body#authentication #main .form-control,
+body#registration #main .form-control,
+body#password #main .form-control {
+  min-height: 44px;
+  padding: 0.65rem 0.75rem;
+  color: var(--b2b-secondary);
+  background-color: var(--b2b-surface);
+  border: 1px solid var(--b2b-border);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+body#authentication #main .form-control:focus,
+body#registration #main .form-control:focus,
+body#password #main .form-control:focus {
+  border-color: var(--b2b-primary);
+  box-shadow: 0 0 0 3px var(--b2b-focus);
+}
+
+body#authentication #main a,
+body#registration #main a,
+body#password #main a {
+  color: var(--b2b-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+body#authentication #main a:hover,
+body#registration #main a:hover,
+body#password #main a:hover {
+  color: var(--b2b-primary-hover);
+}
+
+body#authentication #main .btn-primary,
+body#registration #main .btn-primary,
+body#password #main .btn-primary {
+  min-height: 44px;
+  padding: 0.7rem 1.5rem;
+  color: #ffffff;
+  font-weight: 700;
+  background-color: var(--b2b-primary);
+  border-color: var(--b2b-primary);
+  transition: background-color 160ms ease, border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+body#authentication #main .btn-primary:hover,
+body#authentication #main .btn-primary:focus,
+body#registration #main .btn-primary:hover,
+body#registration #main .btn-primary:focus,
+body#password #main .btn-primary:hover,
+body#password #main .btn-primary:focus {
+  color: #ffffff;
+  background-color: var(--b2b-primary-hover);
+  border-color: var(--b2b-primary-hover);
+  box-shadow: 0 0 0 3px var(--b2b-focus);
+}
+
+body#authentication #main .forgot-password,
+body#authentication #main .no-account {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+body#authentication #main .no-account {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--b2b-border);
+}
+
+body#authentication #main .form-footer,
+body#registration #main .form-footer,
+body#password #main .form-footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--b2b-border);
+}
+
+body#authentication #main .form-control-comment,
+body#registration #main .form-control-comment,
+body#password #main .form-control-comment,
+body#authentication #main .form-control-valign,
+body#registration #main .form-control-valign,
+body#password #main .form-control-valign {
+  color: var(--b2b-text-muted);
+}
+
+body#authentication #main .field-password-policy,
+body#registration #main .field-password-policy,
+body#password #main .field-password-policy {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+body#authentication #main .password-strength-feedback,
+body#registration #main .password-strength-feedback,
+body#password #main .password-strength-feedback {
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+body#password #main .forgotten-password .form-fields .center-email-fields {
+  gap: 0.75rem;
+}
+
+@media (max-width: 767px) {
+  body#authentication #wrapper,
+  body#registration #wrapper,
+  body#password #wrapper {
+    padding-top: 1.25rem;
+  }
+
+  body#authentication #main .page-content,
+  body#registration #main .page-content,
+  body#password #main .page-content {
+    padding: 1.25rem;
+    border-right: 0;
+    border-left: 0;
+    box-shadow: none;
+  }
+
+  body#authentication #main .form-control-label,
+  body#registration #main .form-control-label,
+  body#password #main .form-control-label {
+    padding-top: 0;
+  }
+
+  body#authentication #main .form-footer .btn,
+  body#registration #main .form-footer .btn,
+  body#password #main .form-footer .btn {
+    width: 100%;
+  }
+}
