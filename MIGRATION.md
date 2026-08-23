@@ -20,7 +20,7 @@ reference.
 | Authentication | `templates/customer/authentication.tpl` and `_partials/login-form.tpl` | Inherit the current flow; apply visual changes through scoped CSS | inherited |
 | Password reset | `templates/customer/password-*.tpl` | Inherit the PrestaShop 8.2 password policy, constraints and feedback | inherited |
 | Product page | `templates/catalog/product.tpl` and product partials | Inherit Classic presenter contracts; style price, stock, MOQ, combinations and add-to-cart with scoped CSS | inherited |
-| Cart | `templates/checkout/cart.tpl` and cart partials | Start from Classic; port only confirmed B2B totals and quantity UI | pending |
+| Cart | `templates/checkout/cart.tpl` and cart partials | Inherit Classic totals, AJAX quantity and voucher contracts; apply scoped responsive styling | inherited |
 | Checkout | `templates/checkout/checkout.tpl` and `checkout/_partials/steps/*` | Keep current address, shipping, payment and terms contracts | pending |
 | Order confirmation | `templates/checkout/order-confirmation.tpl` | Keep current hooks and payment-module output | pending |
 
@@ -48,6 +48,14 @@ and minimum order quantities remain owned by PrestaShop 8.2. The old explicit
 are intentionally not copied. Current `displayProductActions`,
 `displayProductAdditionalInfo`, `displayReassurance` and `displayFooterProduct`
 hooks remain available through Classic. Runtime combination and cart tests are
+still required before this row can be marked `verified`.
+
+Cart-flow audit note: the legacy cart templates contain no project-specific
+total calculation. They are outdated copies that miss current responsive image
+sources, safe customization handling, numeric quantity inputs, the current
+checkout URL and protected automatic vouchers. Product totals, discounts,
+shipping, taxes and minimum quantities remain owned by PrestaShop 8.2. Runtime
+tests with customer groups, combinations, vouchers and configured tax rules are
 still required before this row can be marked `verified`.
 
 ## P1: global layout and navigation
