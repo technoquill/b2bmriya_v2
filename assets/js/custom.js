@@ -118,7 +118,9 @@
       return false;
     }
 
+    closeVerticalMenu({ restoreFocus: false });
     lastFocusedElement = trigger;
+    panel.removeAttribute('inert');
     panel.classList.add('is-open');
     panel.setAttribute('aria-hidden', 'false');
     trigger.setAttribute('aria-expanded', 'true');
@@ -143,6 +145,7 @@
 
     panel.classList.remove('is-open');
     panel.setAttribute('aria-hidden', 'true');
+    panel.setAttribute('inert', '');
 
     if (trigger) {
       trigger.setAttribute('aria-expanded', 'false');
@@ -163,22 +166,29 @@
       return;
     }
 
+    closeCart({ restoreFocus: false });
     lastFocusedElement = trigger;
+    menu.removeAttribute('inert');
     menu.classList.add('slide');
+    menu.setAttribute('aria-hidden', 'false');
     document.body.classList.add('b2b-panel-open');
     trigger.setAttribute('aria-expanded', 'true');
     showOverlay();
+
+    menu.querySelector('[data-b2b-menu-close]')?.focus();
   };
 
   const closeVerticalMenu = ({ restoreFocus = true } = {}) => {
     const menu = document.querySelector('#cp_sidevertical_menu_top');
-    const trigger = document.querySelector('.header-center .menu-container .menu-icon');
+    const trigger = document.querySelector('[data-b2b-menu-open]');
 
     if (!menu || !menu.classList.contains('slide')) {
       return;
     }
 
     menu.classList.remove('slide');
+    menu.setAttribute('aria-hidden', 'true');
+    menu.setAttribute('inert', '');
     document.body.classList.remove('b2b-panel-open');
 
     if (trigger) {
@@ -202,7 +212,7 @@
       return;
     }
 
-    const panel = document.querySelector('.b2b-mini-cart.is-open');
+    const panel = document.querySelector('.b2b-mini-cart.is-open, #cp_sidevertical_menu_top.slide');
     if (!panel) {
       return;
     }
@@ -272,11 +282,234 @@
     });
   };
 
+  const decodeText = (value) => {
+    const documentFragment = new DOMParser().parseFromString(String(value || ''), 'text/html');
+    return documentFragment.body.textContent || '';
+  };
+
+  const initializeSearch = () => {
+    document.querySelectorAll('[data-b2b-search]').forEach((search, searchIndex) => {
+      if (search.dataset.b2bSearchReady === 'true') {
+        return;
+      }
+
+      const form = search.querySelector('.b2b-search-form');
+      const input = search.querySelector('.b2b-search-input');
+      const results = search.querySelector('[data-b2b-search-results]');
+      const status = search.querySelector('[data-b2b-search-status]');
+      const endpoint = search.dataset.searchUrl;
+      const minimumLength = Number(search.dataset.minLength) || 3;
+
+      if (!form || !input || !results || !status || !endpoint) {
+        return;
+      }
+
+      search.dataset.b2bSearchReady = 'true';
+      let activeIndex = -1;
+      let requestController = null;
+      let requestTimer = null;
+
+      const getOptions = () => Array.from(results.querySelectorAll('[role="option"]'));
+
+      const setExpanded = (expanded) => {
+        results.hidden = !expanded;
+        input.setAttribute('aria-expanded', String(expanded));
+
+        if (!expanded) {
+          activeIndex = -1;
+          input.removeAttribute('aria-activedescendant');
+        }
+      };
+
+      const setActiveOption = (index) => {
+        const options = getOptions();
+
+        if (!options.length) {
+          return;
+        }
+
+        activeIndex = (index + options.length) % options.length;
+        options.forEach((option, optionIndex) => {
+          option.setAttribute('aria-selected', String(optionIndex === activeIndex));
+        });
+        input.setAttribute('aria-activedescendant', options[activeIndex].id);
+        options[activeIndex].scrollIntoView({ block: 'nearest' });
+      };
+
+      const renderMessage = (message, className = '') => {
+        const messageElement = document.createElement('p');
+        messageElement.className = `b2b-search-message ${className}`.trim();
+        messageElement.textContent = message;
+        results.replaceChildren(messageElement);
+        status.textContent = message;
+        setExpanded(true);
+      };
+
+      const getProductImage = (product) => (
+        product.cover?.bySize?.small_default
+        || window.prestashop?.urls?.no_picture_image?.bySize?.small_default
+        || null
+      );
+
+      const renderProducts = (products, term) => {
+        if (!products.length) {
+          renderMessage(search.dataset.emptyText);
+          return;
+        }
+
+        const list = document.createElement('ul');
+        list.className = 'b2b-search-list';
+        const safeProducts = products.slice(0, 8);
+
+        safeProducts.forEach((product, productIndex) => {
+          const item = document.createElement('li');
+          const link = document.createElement('a');
+          const imageData = getProductImage(product);
+          const copy = document.createElement('span');
+          const name = document.createElement('strong');
+
+          link.id = `b2b-search-option-${searchIndex}-${productIndex}`;
+          link.className = 'b2b-search-product';
+          link.href = product.url || product.link || form.action;
+          link.setAttribute('role', 'option');
+          link.setAttribute('aria-selected', 'false');
+
+          if (imageData?.url) {
+            const image = document.createElement('img');
+            image.src = imageData.url;
+            image.alt = '';
+            image.loading = 'lazy';
+
+            if (imageData.width) {
+              image.width = imageData.width;
+            }
+
+            if (imageData.height) {
+              image.height = imageData.height;
+            }
+
+            link.append(image);
+          }
+
+          copy.className = 'b2b-search-product-copy';
+          name.textContent = decodeText(product.name);
+          copy.append(name);
+
+          if (product.category_name) {
+            const category = document.createElement('small');
+            category.textContent = decodeText(product.category_name);
+            copy.append(category);
+          }
+
+          if (product.price) {
+            const price = document.createElement('span');
+            price.className = 'b2b-search-product-price';
+            price.textContent = decodeText(product.price);
+            copy.append(price);
+          }
+
+          link.append(copy);
+          item.append(link);
+          list.append(item);
+        });
+
+        const allResultsUrl = new URL(form.action, window.location.href);
+        allResultsUrl.searchParams.set('s', term);
+
+        const allResultsLink = document.createElement('a');
+        allResultsLink.className = 'b2b-search-all';
+        allResultsLink.href = allResultsUrl.toString();
+        allResultsLink.textContent = search.dataset.viewAllText;
+
+        results.replaceChildren(list, allResultsLink);
+        status.textContent = `${safeProducts.length} ${search.dataset.viewAllText}`;
+        setExpanded(true);
+      };
+
+      const requestResults = async () => {
+        const term = input.value.trim();
+
+        if (!term) {
+          setExpanded(false);
+          status.textContent = '';
+          return;
+        }
+
+        if (term.length < minimumLength) {
+          renderMessage(search.dataset.minLengthText);
+          return;
+        }
+
+        requestController?.abort();
+        requestController = new AbortController();
+        renderMessage(search.dataset.loadingText, 'is-loading');
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+              'X-Requested-With': 'XMLHttpRequest',
+            },
+            body: new URLSearchParams({ s: term, resultsPerPage: '8' }),
+            signal: requestController.signal,
+          });
+
+          if (!response.ok) {
+            throw new Error(`Search request failed with HTTP ${response.status}`);
+          }
+
+          const payload = await response.json();
+
+          if (input.value.trim() === term) {
+            renderProducts(Array.isArray(payload.products) ? payload.products : [], term);
+          }
+        } catch (error) {
+          if (error.name !== 'AbortError') {
+            renderMessage(search.dataset.errorText, 'is-error');
+          }
+        }
+      };
+
+      input.addEventListener('input', () => {
+        requestController?.abort();
+        window.clearTimeout(requestTimer);
+        requestTimer = window.setTimeout(requestResults, 250);
+      });
+
+      input.addEventListener('keydown', (event) => {
+        const options = getOptions();
+
+        if (event.key === 'ArrowDown' && options.length) {
+          event.preventDefault();
+          setActiveOption(activeIndex + 1);
+        } else if (event.key === 'ArrowUp' && options.length) {
+          event.preventDefault();
+          setActiveOption(activeIndex - 1);
+        } else if (event.key === 'Enter' && activeIndex >= 0 && options[activeIndex]) {
+          event.preventDefault();
+          options[activeIndex].click();
+        } else if (event.key === 'Escape') {
+          setExpanded(false);
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!search.contains(event.target)) {
+          setExpanded(false);
+        }
+      });
+    });
+  };
+
   const initialize = () => {
     hydrateLazyImages();
     initializeCarousels();
+    initializeSearch();
 
-    const menuTrigger = document.querySelector('.header-center .menu-container .menu-icon');
+    const menuTrigger = document.querySelector('[data-b2b-menu-open]');
     if (menuTrigger) {
       menuTrigger.setAttribute('aria-expanded', 'false');
       menuTrigger.setAttribute('aria-controls', 'cp_sidevertical_menu_top');
@@ -317,14 +550,28 @@
       return;
     }
 
-    const menuOpen = event.target.closest('.header-center .menu-container .menu-icon');
+    const submenuToggle = event.target.closest('[data-b2b-submenu-toggle]');
+    if (submenuToggle) {
+      event.preventDefault();
+
+      const submenu = document.getElementById(submenuToggle.getAttribute('aria-controls'));
+      if (submenu) {
+        const expanded = submenuToggle.getAttribute('aria-expanded') === 'true';
+        submenuToggle.setAttribute('aria-expanded', String(!expanded));
+        submenu.hidden = expanded;
+        submenu.classList.toggle('in', !expanded);
+      }
+      return;
+    }
+
+    const menuOpen = event.target.closest('[data-b2b-menu-open]');
     if (menuOpen) {
       event.preventDefault();
       openVerticalMenu(menuOpen);
       return;
     }
 
-    if (event.target.closest('.title_main_menu .menu-icon')) {
+    if (event.target.closest('[data-b2b-menu-close]')) {
       event.preventDefault();
       closeVerticalMenu();
       return;

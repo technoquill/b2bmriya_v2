@@ -1525,6 +1525,278 @@ a:focus {
   color: var(--b2b-secondary);
 }
 
+/* Native PrestaShop 8 search endpoint presented through cp_blocksearch. */
+#header .b2b-search {
+  position: relative;
+  flex: 1 1 500px;
+  width: min(500px, 100%);
+  max-width: 500px;
+  min-width: 12rem;
+}
+
+#header .b2b-search-form {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+#header .b2b-search-form:focus-within {
+  border-color: var(--b2b-primary);
+  box-shadow: 0 0 0 3px rgba(227, 17, 24, 0.24);
+}
+
+#header .b2b-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 44px;
+  padding: 0 0.9rem;
+  color: var(--b2b-secondary);
+  background: #fff;
+  border: 0;
+  outline: 0;
+}
+
+#header .b2b-search-input::placeholder {
+  color: #6c737a;
+  opacity: 1;
+}
+
+#header .b2b-search-submit {
+  display: inline-flex;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #fff;
+  background: var(--b2b-primary);
+  border: 0;
+  cursor: pointer;
+}
+
+#header .b2b-search-submit:hover,
+#header .b2b-search-submit:focus-visible {
+  background: var(--b2b-primary-hover);
+}
+
+#header .b2b-search-submit .material-icons {
+  font-size: 24px;
+}
+
+#header .b2b-search-results {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 1100;
+  width: max(100%, 22rem);
+  max-height: min(70vh, 34rem);
+  overflow-y: auto;
+  color: var(--b2b-secondary);
+  background: #fff;
+  border: 1px solid var(--b2b-border);
+  border-radius: 5px;
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.2);
+}
+
+#header .b2b-search-results[hidden] {
+  display: none !important;
+}
+
+#header .b2b-search-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+#header .b2b-search-list li + li {
+  border-top: 1px solid var(--b2b-border);
+}
+
+#header .b2b-search-product {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  min-height: 5.5rem;
+  padding: 0.65rem 0.8rem;
+  color: var(--b2b-secondary);
+}
+
+#header .b2b-search-product:hover,
+#header .b2b-search-product:focus,
+#header .b2b-search-product[aria-selected="true"] {
+  color: var(--b2b-secondary);
+  background: var(--b2b-surface-muted);
+  outline: 0;
+}
+
+#header .b2b-search-product img {
+  flex: 0 0 68px;
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--b2b-border);
+}
+
+#header .b2b-search-product-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.15rem;
+  line-height: 1.35;
+}
+
+#header .b2b-search-product-copy strong {
+  overflow: hidden;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+}
+
+#header .b2b-search-product-copy small {
+  overflow: hidden;
+  color: var(--b2b-text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#header .b2b-search-product-price {
+  color: var(--b2b-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+#header .b2b-search-message {
+  padding: 1rem;
+  margin: 0;
+  color: var(--b2b-text-muted);
+  text-align: center;
+}
+
+#header .b2b-search-message.is-error {
+  color: #a51d22;
+}
+
+#header .b2b-search-message.is-loading::before {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  vertical-align: -0.15rem;
+  content: "";
+  border: 2px solid var(--b2b-border);
+  border-top-color: var(--b2b-primary);
+  border-radius: 50%;
+  animation: b2b-search-spin 0.7s linear infinite;
+}
+
+#header .b2b-search-all {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  background: var(--b2b-primary);
+}
+
+#header .b2b-search-all:hover,
+#header .b2b-search-all:focus {
+  color: #fff;
+  background: var(--b2b-primary-hover);
+}
+
+@keyframes b2b-search-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Accessible controls for the retained vertical category tree. */
+#header [data-b2b-menu-open],
+#header [data-b2b-menu-close] {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+#header [data-b2b-menu-open]:focus-visible,
+#header [data-b2b-menu-close]:focus-visible,
+#cp_sidevertical_menu_top [data-b2b-submenu-toggle]:focus-visible {
+  outline: 3px solid var(--b2b-focus);
+  outline-offset: 3px;
+}
+
+#cp_sidevertical_menu_top[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+#cp_sidevertical_menu_top .title_main_menu {
+  display: flex;
+  align-items: center;
+}
+
+#cp_sidevertical_menu_top .title_menu {
+  margin: 0;
+  color: var(--b2b-secondary);
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+#cp_sidevertical_menu_top [data-b2b-menu-close] {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  color: var(--b2b-secondary);
+}
+
+#cp_sidevertical_menu_top .b2b-menu-link-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#cp_sidevertical_menu_top .b2b-menu-link-row > a {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-bottom: 0;
+}
+
+#cp_sidevertical_menu_top [data-b2b-submenu-toggle] {
+  display: inline-flex;
+  flex: 0 0 44px;
+  width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--b2b-secondary);
+  background: var(--b2b-surface-muted);
+  border: 0;
+  cursor: pointer;
+}
+
+#cp_sidevertical_menu_top [data-b2b-submenu-toggle] .material-icons {
+  font-size: 18px;
+}
+
+#cp_sidevertical_menu_top .collapse[hidden] {
+  display: none !important;
+}
+
+#cp_sidevertical_menu_top .collapse.in:not([hidden]) {
+  display: block;
+}
+
 #header .head-compare,
 #header .head-wishlist,
 #header #_desktop_cart {
@@ -2247,6 +2519,12 @@ body.b2b-panel-open {
     width: auto;
   }
 
+  #header .b2b-search {
+    flex: 1 1 auto;
+    width: auto;
+    max-width: none;
+  }
+
   #header .header_logo img {
     max-width: 200px;
     max-height: 52px;
@@ -2345,6 +2623,19 @@ body.b2b-panel-open {
   #header #search_block_top button[type="submit"] {
     flex-basis: 46px;
     min-width: 46px;
+  }
+
+  #header .b2b-search {
+    min-width: 0;
+  }
+
+  #header .b2b-search-submit {
+    flex-basis: 46px;
+    width: 46px;
+  }
+
+  #header .b2b-search-results {
+    width: min(22rem, calc(100vw - 2rem));
   }
 
   #index .cp-carousel {

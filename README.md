@@ -40,5 +40,7 @@ staging environment.
   shipping and total contracts and receives scoped responsive styling.
 - The active database hook/module composition and page layouts are now recorded
   in `theme.yml` and `HOOK-MAP.md`.
+- Header search suggestions use the PrestaShop 8 search controller, and the
+  configured vertical category tree has keyboard-accessible controls.
 - Checkout, global templates, catalogue listings and module-specific
   presentation still require staging verification.

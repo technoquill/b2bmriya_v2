@@ -26,8 +26,11 @@
     <aside
       id="b2b-mini-cart"
       class="b2b-mini-cart"
+      role="dialog"
+      aria-modal="true"
       aria-hidden="true"
       aria-label="{l s='Shopping cart' d='Shop.Theme.Checkout'}"
+      inert
     >
       <div class="b2b-mini-cart-header">
         <h2>{l s='Shopping cart' d='Shop.Theme.Checkout'} ({$cart.products_count})</h2>

@@ -67,7 +67,7 @@ still required before this row can be marked `verified`.
 | Header | `templates/_partials/header.tpl` | Rebuild from current hooks; port the visual hierarchy without old inline scripts | pending |
 | Footer | `templates/_partials/footer.tpl` | Rebuild from current hooks; remove duplicate legacy footer partials | pending |
 | Main menu | `cp_sideverticalmenu` | Retain the live menu owner; modernize its mobile behavior without changing its configured tree | in progress |
-| Search | `cp_blocksearch` | Retain the live search module; repair its API/XHR contract before activation | in progress |
+| Search | `cp_blocksearch` | Keep the live hook/module owner; render suggestions through the native PrestaShop 8 search endpoint | in progress |
 | Mini-cart | `modules/ps_shoppingcart` | Keep the current native data contract and recreate the legacy header presentation | in progress |
 
 ## P2: catalogue, content and account
@@ -92,7 +92,7 @@ requires runtime verification on PrestaShop 8.2.
 
 | Group | Modules | Planned action | Status |
 | --- | --- | --- | --- |
-| Navigation/search | `cp_blocksearch`, `cp_sideverticalmenu` | Retain configured behavior; modernize PHP/Smarty/JS | in progress |
+| Navigation/search | `cp_blocksearch`, `cp_sideverticalmenu` | Native search JSON contract and accessible menu shell implemented; runtime verification remains | in progress |
 | Home catalogue | `cp_featuredproducts`, `cp_newproducts`, `cp_specialsproducts`, `cp_bestsellingproducts`, `cp_categoryproductsslider`, `cp_categorylist`, `cp_brandlogo` | Retain active order and content; refactor only where compatibility requires it | pending |
 | Content | `cp_serviceblock`, `cp_footercms1` | Retain active database-managed content and reproduce its layout | pending |
 | Product helpers | `cp_imagehover`, `cp_countdown` | Retain active hooks and audit presenter assumptions | pending |
