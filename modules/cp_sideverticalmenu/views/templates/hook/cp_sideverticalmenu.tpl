@@ -14,7 +14,7 @@
     >
       <span class="cat-title">
         <i class="material-icons menu-open" aria-hidden="true">menu</i>
-        {l s='Browse Categories' mod='cp_sideverticalmenu'}
+        {l s='Browse Categories ' mod='cp_sideverticalmenu'}
       </span>
     </button>
   </div>

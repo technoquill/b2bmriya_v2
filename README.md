@@ -26,9 +26,11 @@ configuration. B2B rules stay in modules, PrestaShop data and services.
 
 ## Current state
 
-This is a migration scaffold, not a finished storefront. Do not enable it on a
-production shop until the P0 checks in [MIGRATION.md](MIGRATION.md) pass in a
-staging environment.
+The theme is active on the local `b2b-mriya.dev` staging copy and has passed
+desktop/mobile smoke tests for the home page, category listing, product page,
+native search, category menu and add/remove-cart flow. It is not yet approved
+for production: authenticated customer flows and the complete checkout matrix
+in [MIGRATION.md](MIGRATION.md) still need verification.
 
 ## Current coverage
 
@@ -42,5 +44,10 @@ staging environment.
   in `theme.yml` and `HOOK-MAP.md`.
 - Header search suggestions use the PrestaShop 8 search controller, and the
   configured vertical category tree has keyboard-accessible controls.
-- Checkout, global templates, catalogue listings and module-specific
-  presentation still require staging verification.
+- Header, footer, slider, service icons, category/product carousels, catalogue
+  listing, product page and cart now render without browser-console errors at
+  the tested desktop and mobile breakpoints.
+- Currency, language and customer modules use ID-free theme overrides because
+  the same hooks are intentionally rendered in both the top bar and side menu.
+- Checkout, authenticated account flows and module combinations that require
+  customer-group data still require staging verification.

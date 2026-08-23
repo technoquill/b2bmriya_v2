@@ -16,7 +16,19 @@
   data-error-text="{l s='Search is temporarily unavailable.' mod='cp_blocksearch'}"
   data-view-all-text="{l s='View all results' mod='cp_blocksearch'}"
 >
+  <button
+    class="b2b-search-toggle"
+    type="button"
+    data-b2b-search-toggle
+    aria-controls="b2b-search-form"
+    aria-expanded="false"
+    aria-label="{l s='Search' mod='cp_blocksearch'}"
+  >
+    <i class="material-icons" aria-hidden="true">search</i>
+  </button>
+
   <form
+    id="b2b-search-form"
     class="b2b-search-form"
     method="get"
     action="{$search_controller_url|escape:'html':'UTF-8'}"

@@ -52,6 +52,9 @@ The legacy search category selector was hidden by the effective storefront CSS.
 It is therefore not reproduced as a non-functional control. The visible search
 field keeps its placement and now obtains suggestions from the current core
 search controller, including its product visibility and customer-price rules.
+The currency, language and customer modules have ID-free v2 templates because
+their configured header and side-panel hooks intentionally render the same
+module more than once on a page.
 
 ## Home page
 
@@ -111,6 +114,12 @@ content.
 `cp_testimonial` and `cpcouponpop` are not part of the active target layout.
 
 ## Activation gate
+
+Local checkpoint on 2026-08-23: v2 is enabled only on the local staging copy.
+Header/search/menu, slider, service block, available home catalogue blocks,
+category listing/filter, product add-to-cart, mini-cart removal, empty cart and
+footer were exercised at 1280 px and 390 px without console warnings/errors or
+horizontal document overflow. This does not approve production activation.
 
 Do not switch the production shop to v2 until all of the following are true:
 

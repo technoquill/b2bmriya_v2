@@ -83,6 +83,16 @@
     });
   };
 
+  const syncEmptyProductMessages = (root = document) => {
+    const messages = root.matches?.('.product-minimal-quantity')
+      ? [root]
+      : Array.from(root.querySelectorAll?.('.product-minimal-quantity') || []);
+
+    messages.forEach((message) => {
+      message.hidden = message.textContent.trim() === '';
+    });
+  };
+
   const getOverlay = () => document.querySelector('[data-b2b-overlay]');
 
   const showOverlay = () => {
@@ -297,6 +307,7 @@
       const input = search.querySelector('.b2b-search-input');
       const results = search.querySelector('[data-b2b-search-results]');
       const status = search.querySelector('[data-b2b-search-status]');
+      const searchToggle = search.querySelector('[data-b2b-search-toggle]');
       const endpoint = search.dataset.searchUrl;
       const minimumLength = Number(search.dataset.minLength) || 3;
 
@@ -318,6 +329,17 @@
         if (!expanded) {
           activeIndex = -1;
           input.removeAttribute('aria-activedescendant');
+        }
+      };
+
+      const setMobileSearchOpen = (open) => {
+        search.classList.toggle('is-open', open);
+        searchToggle?.setAttribute('aria-expanded', String(open));
+
+        if (open) {
+          window.requestAnimationFrame(() => input.focus());
+        } else {
+          setExpanded(false);
         }
       };
 
@@ -479,6 +501,10 @@
         requestTimer = window.setTimeout(requestResults, 250);
       });
 
+      searchToggle?.addEventListener('click', () => {
+        setMobileSearchOpen(!search.classList.contains('is-open'));
+      });
+
       input.addEventListener('keydown', (event) => {
         const options = getOptions();
 
@@ -493,12 +519,15 @@
           options[activeIndex].click();
         } else if (event.key === 'Escape') {
           setExpanded(false);
+          setMobileSearchOpen(false);
+          searchToggle?.focus();
         }
       });
 
       document.addEventListener('click', (event) => {
         if (!search.contains(event.target)) {
           setExpanded(false);
+          setMobileSearchOpen(false);
         }
       });
     });
@@ -506,6 +535,7 @@
 
   const initialize = () => {
     hydrateLazyImages();
+    syncEmptyProductMessages();
     initializeCarousels();
     initializeSearch();
 
@@ -533,6 +563,8 @@
           }
         });
       });
+
+      syncEmptyProductMessages();
     });
 
     observer.observe(document.body, { childList: true, subtree: true });

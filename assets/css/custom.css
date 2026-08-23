@@ -502,6 +502,44 @@ body#product #main .product-quantity #quantity_wanted:focus {
   box-shadow: 0 0 0 3px var(--b2b-focus);
 }
 
+body#product #main .product-quantity .bootstrap-touchspin {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 48px;
+}
+
+body#product #main .product-quantity .bootstrap-touchspin #quantity_wanted {
+  padding-right: 28px;
+}
+
+body#product #main .product-quantity .input-group-btn-vertical {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  float: none;
+  width: 28px;
+  height: 48px;
+  flex-direction: column;
+}
+
+body#product #main .product-quantity .input-group-btn-vertical .btn-touchspin {
+  display: inline-flex;
+  width: 28px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--b2b-border);
+}
+
+body#product #main .product-quantity .input-group-btn-vertical .material-icons {
+  position: static;
+  font-size: 16px;
+}
+
 body#product #main .product-quantity .add {
   flex: 1 1 220px;
   margin: 0;
@@ -1353,13 +1391,116 @@ a:focus {
 #header .header-nav #_desktop_language_selector,
 #header .header-nav #_desktop_currency_selector,
 #header .header-nav #_desktop_user_info,
+#header .header-nav .b2b-selector,
+#header .header-nav .b2b-user-info,
 #header .header-nav .user-info {
   position: relative;
   margin: 0;
   white-space: nowrap;
 }
 
+.b2b-selector details {
+  position: relative;
+}
+
+.b2b-selector summary {
+  display: inline-flex;
+  gap: 0.3rem;
+  align-items: center;
+  min-height: 32px;
+  color: inherit;
+  cursor: pointer;
+  list-style: none;
+}
+
+.b2b-selector summary::-webkit-details-marker {
+  display: none;
+}
+
+.b2b-selector summary .material-icons {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.b2b-selector details[open] summary .material-icons {
+  transform: rotate(180deg);
+}
+
+.b2b-selector ul {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 1000;
+  min-width: 11rem;
+  padding: 0.5rem 0;
+  margin: 0;
+  color: var(--b2b-secondary);
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--b2b-border);
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.16);
+}
+
+.b2b-selector li a {
+  display: block;
+  padding: 0.45rem 0.9rem;
+  color: var(--b2b-secondary);
+}
+
+.b2b-selector li.current a,
+.b2b-selector li a:hover,
+.b2b-selector li a:focus {
+  color: var(--b2b-primary);
+  background: var(--b2b-surface-muted);
+}
+
+#header .header-nav .b2b-selector,
+#header .header-nav .b2b-user-info,
+#header .header-nav .b2b-user-info a {
+  color: #aaa;
+}
+
+#header .header-nav .b2b-user-info {
+  display: flex;
+  gap: 0.75rem;
+}
+
+#header .header-nav .b2b-user-info a {
+  display: inline-flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+#cp_sidevertical_menu_top .verticalmenu-side .b2b-selector,
+#cp_sidevertical_menu_top .verticalmenu-side .b2b-user-info {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--b2b-border);
+}
+
+#cp_sidevertical_menu_top .verticalmenu-side .b2b-selector summary {
+  width: 100%;
+}
+
+#cp_sidevertical_menu_top .verticalmenu-side .b2b-selector ul {
+  position: static;
+  width: 100%;
+  min-width: 0;
+  margin-top: 0.35rem;
+  border: 0;
+  box-shadow: none;
+}
+
+#cp_sidevertical_menu_top .verticalmenu-side .b2b-user-info,
+#cp_sidevertical_menu_top .verticalmenu-side .b2b-user-info a {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  color: var(--b2b-secondary);
+}
+
 #header .header-nav .dropdown-menu {
+  display: none;
   top: calc(100% + 0.5rem);
   right: 0;
   left: auto;
@@ -1369,6 +1510,12 @@ a:focus {
   background: #fff;
   border: 1px solid var(--b2b-border);
   box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.16);
+}
+
+#header .header-nav .dropdown.open > .dropdown-menu,
+#header .header-nav .dropdown.show > .dropdown-menu,
+#header .header-nav .dropdown-menu.show {
+  display: block;
 }
 
 #header .header-nav .dropdown-menu a {
@@ -1532,6 +1679,10 @@ a:focus {
   width: min(500px, 100%);
   max-width: 500px;
   min-width: 12rem;
+}
+
+#header .b2b-search-toggle {
+  display: none;
 }
 
 #header .b2b-search-form {
@@ -2030,6 +2181,11 @@ body.b2b-panel-open {
   font-size: 4rem;
 }
 
+#blockcart-modal .cart-content-btn .btn-primary,
+#blockcart-modal .cart-content-btn .btn-secondary {
+  color: #fff;
+}
+
 /* Home hook and module composition */
 #wrapper-top {
   position: relative;
@@ -2083,6 +2239,8 @@ body.b2b-panel-open {
 #index .bestseller-products,
 #index .brands {
   position: relative;
+  float: none;
+  clear: both;
   width: 100%;
   padding: 2rem 0;
   margin: 0;
@@ -2266,6 +2424,40 @@ body.b2b-panel-open {
   width: 38px;
   height: 38px;
   color: var(--b2b-primary);
+  background-color: var(--b2b-primary);
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+#cpserviceblock .service-1 .service_image {
+  -webkit-mask-image: url("../img/megnor/shipping.svg");
+  mask-image: url("../img/megnor/shipping.svg");
+}
+
+#cpserviceblock .service-2 .service_image {
+  -webkit-mask-image: url("../img/megnor/sale.svg");
+  mask-image: url("../img/megnor/sale.svg");
+}
+
+#cpserviceblock .service-3 .service_image {
+  -webkit-mask-image: url("../img/megnor/support.svg");
+  mask-image: url("../img/megnor/support.svg");
+}
+
+#cpserviceblock .service-4 .service_image {
+  -webkit-mask-image: url("../img/megnor/telephone.svg");
+  mask-image: url("../img/megnor/telephone.svg");
+}
+
+#cpserviceblock .service-5 .service_image {
+  -webkit-mask-image: url("../img/megnor/gifts.svg");
+  mask-image: url("../img/megnor/gifts.svg");
 }
 
 #cpserviceblock .service-title {
@@ -2557,8 +2749,9 @@ body.b2b-panel-open {
     overflow: visible;
   }
 
-  #header .header-nav .hidden-sm-down {
-    display: inline-block !important;
+  #header .header-nav button.hidden-sm-down,
+  #header .header-nav a.hidden-sm-down {
+    display: inline-flex !important;
   }
 
   #header .header-nav .hidden-md-up,
@@ -2607,6 +2800,43 @@ body.b2b-panel-open {
 }
 
 @media (max-width: 575px) {
+  #header .header-div > .container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  #header .header-center {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  #header .header-left {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-start;
+  }
+
+  #header .header-right {
+    grid-column: 3;
+    grid-row: 1;
+    width: auto;
+    gap: 0.2rem;
+  }
+
+  #header .header-center .cat-title {
+    font-size: 0;
+    line-height: 0;
+  }
+
+  #header .header-center .cat-title .material-icons {
+    font-size: 28px;
+    line-height: 1;
+  }
+
   #header .header-logo-heading,
   #header .header_logo {
     max-width: 135px;
@@ -2616,8 +2846,9 @@ body.b2b-panel-open {
     max-width: 135px;
   }
 
-  #header .header-right {
-    gap: 0.6rem;
+  #header .header-top .head-compare,
+  #header .header-top .head-wishlist {
+    display: none;
   }
 
   #header #search_block_top button[type="submit"] {
@@ -2626,7 +2857,49 @@ body.b2b-panel-open {
   }
 
   #header .b2b-search {
-    min-width: 0;
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    max-width: 44px;
+  }
+
+  #header .b2b-search-toggle {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  #header .b2b-search-toggle .material-icons {
+    font-size: 26px;
+  }
+
+  #header .b2b-search-form {
+    display: none;
+  }
+
+  #header .b2b-search.is-open {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0.9375rem;
+    left: 0.9375rem;
+    z-index: 1200;
+    width: auto;
+    max-width: none;
+  }
+
+  #header .b2b-search.is-open .b2b-search-toggle {
+    display: none;
+  }
+
+  #header .b2b-search.is-open .b2b-search-form {
+    display: flex;
   }
 
   #header .b2b-search-submit {
