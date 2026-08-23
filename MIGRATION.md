@@ -5,7 +5,8 @@
 - Runtime: PrestaShop 8.2.7.
 - Parent theme: `classic` 2.2.0.
 - Legacy reference: `themes/b2b_mriya`.
-- Strategy: inherit first, then add the smallest possible overrides.
+- Strategy: preserve the live design, hooks and active module composition while
+  rebuilding on current PrestaShop 8 contracts.
 - Status values: `pending`, `in progress`, `inherited`, `verified`, `removed`.
 
 The legacy theme remains untouched and is used only as a visual and functional
@@ -43,12 +44,11 @@ before these rows can be marked `verified`.
 
 Product-flow audit note: the legacy product templates contain no custom B2B
 price calculation. Group-specific prices, combination quantities, availability
-and minimum order quantities remain owned by PrestaShop 8.2. The old explicit
-`displayCountdown`, `displayStCompareButton` and `displayStWishlistButton` hooks
-are intentionally not copied. Current `displayProductActions`,
-`displayProductAdditionalInfo`, `displayReassurance` and `displayFooterProduct`
-hooks remain available through Classic. Runtime combination and cart tests are
-still required before this row can be marked `verified`.
+and minimum order quantities remain owned by PrestaShop 8.2. The visual
+`displayCountDown`, `displayStCompareButton` and `displayStWishlistButton`
+integrations must be restored without replacing current product presenter and
+cart contracts. Runtime combination and cart tests are still required before
+this row can be marked `verified`.
 
 Cart-flow audit note: the legacy cart templates contain no project-specific
 total calculation. They are outdated copies that miss current responsive image
@@ -62,13 +62,13 @@ still required before this row can be marked `verified`.
 
 | Area | Legacy source | v2 strategy | Status |
 | --- | --- | --- | --- |
-| Layouts | `templates/layouts/*.tpl` | Do not copy; extend parent layouts only when a required block is identified | pending |
+| Layouts | `templates/layouts/*.tpl` | Use current parent layouts and restore only required legacy hook zones | in progress |
 | Head and SEO | `templates/_partials/head.tpl` and microdata templates | Keep Classic hooks and metadata; validate legacy JSON-LD separately | pending |
 | Header | `templates/_partials/header.tpl` | Rebuild from current hooks; port the visual hierarchy without old inline scripts | pending |
 | Footer | `templates/_partials/footer.tpl` | Rebuild from current hooks; remove duplicate legacy footer partials | pending |
-| Main menu | `modules/ps_mainmenu` and `cp_sideverticalmenu` overrides | Choose one menu owner and make mobile behavior accessible | pending |
-| Search | `modules/cp_blocksearch` | Audit module API and XHR endpoint before porting its markup | pending |
-| Mini-cart | `modules/ps_shoppingcart` | Start from the current native module override | pending |
+| Main menu | `cp_sideverticalmenu` | Retain the live menu owner; modernize its mobile behavior without changing its configured tree | in progress |
+| Search | `cp_blocksearch` | Retain the live search module; repair its API/XHR contract before activation | in progress |
+| Mini-cart | `modules/ps_shoppingcart` | Keep the current native data contract and recreate the legacy header presentation | in progress |
 
 ## P2: catalogue, content and account
 
@@ -77,29 +77,32 @@ still required before this row can be marked `verified`.
 | Product listings | `templates/catalog/listing/*` | Extend current `product-list.tpl`; port grid/list controls only if still required | pending |
 | Product miniature | `templates/catalog/_partials/miniatures/product.tpl` | Rebuild on the current product presenter contract | pending |
 | Facets and sorting | catalogue partials and `ps_facetedsearch` override | Use current module templates and events | pending |
-| Home page | custom `displayHome` modules | Replace layout coupling with explicit, documented hook sections | pending |
+| Home page | custom `displayHome` modules | Preserve the exact active order recorded in `HOOK-MAP.md`; modernize modules individually | in progress |
 | Customer account | `templates/customer/*` | Inherit current empty states, order details and account transformation | pending |
 | CMS/contact/stores | `templates/cms/*` and `contact.tpl` | Port styling after commerce flows | pending |
 | Errors | `templates/errors/*` | Inherit Classic, including HTTP 410 support | pending |
 
 ## Custom module inventory
 
-All modules declared under `dependencies.modules` in the legacy `theme.yml`
-are present in the shop's root `modules` directory. Their version declarations
-are mostly `1.0.0` and many advertise a minimum PrestaShop version from 1.5 or
-1.7, so presence does not prove PrestaShop 8.2 compatibility.
+The database dump distinguishes modules that are actually active from modules
+merely declared by the legacy theme. Active visual modules are retained for
+parity and modernized in place where necessary. Disabled modules are excluded.
+Most custom modules declare version `1.0.0`, so every retained module still
+requires runtime verification on PrestaShop 8.2.
 
 | Group | Modules | Planned action | Status |
 | --- | --- | --- | --- |
-| Navigation/search | `cp_blocksearch`, `cp_sideverticalmenu`, `cp_headercms1` | PHP/Smarty/JS audit, then keep or replace | pending |
-| Home catalogue | `cp_featuredproducts`, `cp_newproducts`, `cp_specialsproducts`, `cp_bestsellingproducts`, `cp_categoryproductsslider`, `cp_categorylist`, `cp_brandlogo` | Prefer maintained native modules where behavior overlaps | pending |
-| Banners/content | `cp_cmsbanner1`, `cp_cmsbanner2`, `cp_cmsbanner3`, `cp_leftbanner1`, `cp_serviceblock`, `cp_testimonial`, `cp_parallaximages` | Verify content ownership and replace hard-coded markup | pending |
-| Product helpers | `cp_imagehover`, `cp_countdown`, `cp_shippingcmsblock`, `cp_sizechartcmsblock` | Audit product presenter assumptions and accessibility | pending |
-| Sidebars | `cp_sidebarnewproducts`, `cp_sidebarfeaturedproducts` | Remove if the v2 layout has no sidebars | pending |
-| Store UI | `cpcouponpop`, `cp_salenotification`, `cp_cookie` | Review consent, performance and necessity | pending |
-| Theme framework | `cp_themeoptions` | Remove theme-wide CSS/JS generation after required settings are migrated | pending |
-| Wishlist/compare | `stfeature` | Decide whether to update it or replace it with maintained modules | pending |
-| Slider | `cp_imageslider` | Prefer a maintained, accessible slider or a static responsive banner | pending |
+| Navigation/search | `cp_blocksearch`, `cp_sideverticalmenu` | Retain configured behavior; modernize PHP/Smarty/JS | in progress |
+| Home catalogue | `cp_featuredproducts`, `cp_newproducts`, `cp_specialsproducts`, `cp_bestsellingproducts`, `cp_categoryproductsslider`, `cp_categorylist`, `cp_brandlogo` | Retain active order and content; refactor only where compatibility requires it | pending |
+| Content | `cp_serviceblock`, `cp_footercms1` | Retain active database-managed content and reproduce its layout | pending |
+| Product helpers | `cp_imagehover`, `cp_countdown` | Retain active hooks and audit presenter assumptions | pending |
+| Sidebars | `cp_sidebarnewproducts`, `cp_sidebarfeaturedproducts`, `amazzingfilter` | Retain on the left-column layouts recorded in the database | pending |
+| Theme framework | `cp_themeoptions` | Keep during parity work; retire only after every effective setting is migrated | in progress |
+| Wishlist/compare | `stfeature` | Retain for parity; replace only through a separate approved migration | pending |
+| Slider | `cp_imageslider` | Retain the configured slide while modernizing accessibility and JavaScript | pending |
+
+Disabled legacy modules are listed in [HOOK-MAP.md](HOOK-MAP.md) and are not
+part of the v2 activation set.
 
 ## Asset decisions
 

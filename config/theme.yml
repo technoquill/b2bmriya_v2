@@ -2,12 +2,208 @@ parent: classic
 
 name: b2b_mriya_v2
 display_name: B2B Mriya v2
-version: 0.1.0
+version: 0.2.0
 
 author:
   name: "Mykhailo Kulyk"
   email: "info@profisite.com.ua"
   url: "https://b2b-mriya.com.ua"
 
+meta:
+  compatibility:
+    from: 8.2.1
+    to: ~
+
+  available_layouts:
+    layout-full-width:
+      name: Full Width
+      description: No side columns.
+    layout-both-columns:
+      name: Three Columns
+      description: One central column with left and right sidebars.
+    layout-left-column:
+      name: Left Column
+      description: Main content with the legacy left sidebar.
+    layout-right-column:
+      name: Right Column
+      description: Main content with a right sidebar.
+
 assets:
   use_parent_assets: true
+
+global_settings:
+  configuration:
+    PS_QUICK_VIEW: true
+    PS_IMAGE_QUALITY: jpg
+
+  modules:
+    to_enable:
+      - amazzingfilter
+      - blockreassurance
+      - cp_bestsellingproducts
+      - cp_blocksearch
+      - cp_brandlogo
+      - cp_categorylist
+      - cp_categoryproductsslider
+      - cp_countdown
+      - cp_featuredproducts
+      - cp_footercms1
+      - cp_imagehover
+      - cp_imageslider
+      - cp_newproducts
+      - cp_serviceblock
+      - cp_sidebarfeaturedproducts
+      - cp_sidebarnewproducts
+      - cp_sideverticalmenu
+      - cp_specialsproducts
+      - cp_themeoptions
+      - ps_categorytree
+      - ps_contactinfo
+      - ps_currencyselector
+      - ps_customersignin
+      - ps_languageselector
+      - ps_linklist
+      - ps_shoppingcart
+      - stfeature
+    to_disable:
+      - blockwishlist
+      - productcomments
+      - ps_imageslider
+      - ps_mainmenu
+      - ps_searchbar
+      - ps_sharebuttons
+
+  hooks:
+    modules_to_hook:
+      displayBackOfficeHeader:
+        - stfeature
+      displayAfterBodyOpeningTag:
+        - blockreassurance
+      displayNav2:
+        - ps_languageselector
+        - ps_currencyselector
+        - ps_customersignin
+      displayHeaderCenter:
+        - cp_sideverticalmenu
+      displayHeaderRight:
+        - cp_blocksearch
+        - ps_shoppingcart
+      displayNavFullWidth:
+        - blockreassurance
+      displayTopColumn:
+        - cp_imageslider
+      displayHome:
+        - cp_serviceblock
+        - cp_featuredproducts
+        - cp_newproducts
+        - cp_specialsproducts
+        - cp_categorylist
+        - cp_categoryproductsslider
+        - cp_bestsellingproducts
+        - cp_brandlogo
+      displayCpHoverImage:
+        - cp_imagehover
+      displayCountDown:
+        - cp_countdown
+      displayLeftColumn:
+        - amazzingfilter
+        - cp_sidebarnewproducts
+        - cp_sidebarfeaturedproducts
+      displayLeftColumnProduct:
+        - ps_categorytree
+        - cp_sidebarnewproducts
+        - cp_sidebarfeaturedproducts
+      displayReassurance:
+        - blockreassurance
+      displayStCompareButton:
+        - stfeature
+      displayStCompareTopLink:
+        - stfeature
+      displayStWishlistButton:
+        - stfeature
+      displayStWishlistTopLink:
+        - stfeature
+      displayCustomerSide:
+        - ps_customersignin
+      displaySide:
+        - ps_currencyselector
+        - ps_languageselector
+      displayFooterleft:
+        - ps_contactinfo
+      displayFooter:
+        - ps_linklist
+        - cp_themeoptions
+      displayFooterAfter:
+        - cp_footercms1
+        - cp_themeoptions
+
+  image_types:
+    cart_default:
+      width: 80
+      height: 80
+      scope: [products]
+    small_default:
+      width: 80
+      height: 80
+      scope: [products, categories, manufacturers, suppliers]
+    medium_default:
+      width: 300
+      height: 300
+      scope: [products, manufacturers, suppliers]
+    home_default:
+      width: 210
+      height: 210
+      scope: [products]
+    large_default:
+      width: 1000
+      height: 1000
+      scope: [products, manufacturers, suppliers]
+    category_default:
+      width: 300
+      height: 300
+      scope: [categories]
+    stores_default:
+      width: 210
+      height: 210
+      scope: [stores]
+    inner_default:
+      width: 196
+      height: 196
+      scope: [products]
+
+  new_password_policy_feature: true
+
+theme_settings:
+  default_layout: layout-left-column
+  layouts:
+    index: layout-full-width
+    product: layout-full-width
+    category: layout-left-column
+    cart: layout-left-column
+    checkout: layout-full-width
+    contact: layout-left-column
+    module-stfeature-productscompare: layout-left-column
+    module-stfeature-mywishlist: layout-left-column
+    module-stfeature-viewwishlist: layout-left-column
+
+dependencies:
+  modules:
+    - amazzingfilter
+    - cp_bestsellingproducts
+    - cp_blocksearch
+    - cp_brandlogo
+    - cp_categorylist
+    - cp_categoryproductsslider
+    - cp_countdown
+    - cp_featuredproducts
+    - cp_footercms1
+    - cp_imagehover
+    - cp_imageslider
+    - cp_newproducts
+    - cp_serviceblock
+    - cp_sidebarfeaturedproducts
+    - cp_sidebarnewproducts
+    - cp_sideverticalmenu
+    - cp_specialsproducts
+    - cp_themeoptions
+    - stfeature
