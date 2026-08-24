@@ -26,11 +26,13 @@ configuration. B2B rules stay in modules, PrestaShop data and services.
 
 ## Current state
 
-The theme is active on the local `b2b-mriya.dev` staging copy and has passed
-desktop/mobile smoke tests for the home page, category listing, product page,
-native search, category menu and add/remove-cart flow. It is not yet approved
-for production: authenticated customer flows and the complete checkout matrix
-in [MIGRATION.md](MIGRATION.md) still need verification.
+The theme is active on the local `b2b-mriya.dev` staging copy and has passed a
+responsive public-page audit at 320, 768, 1024 and 1440 px. The coverage
+includes the home page, catalogue and search listings, product, populated cart,
+the first checkout step, customer access forms, CMS/contact/store/system pages,
+mobile navigation, filters, search suggestions and cart modal. It is not yet
+approved for production: authenticated customer flows and the complete
+checkout matrix in [MIGRATION.md](MIGRATION.md) still need verification.
 
 ## Current coverage
 
