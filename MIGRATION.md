@@ -73,6 +73,18 @@ Known checkout follow-up: the inherited personal-data step renders duplicate
 are present. Scope those field IDs before the accessibility gate is considered
 complete.
 
+Responsive audit checkpoint (2026-08-24): public page types were exercised at
+320, 768, 1024 and 1440 px without horizontal document overflow or browser
+console warnings/errors. Coverage included home, category, search and custom
+filter panel, product, populated cart, add-to-cart modal, the anonymous
+checkout personal-data step, login, registration, password recovery, contact,
+CMS, stores, sitemap, comparison and 404 pages. The contact file input, mobile
+checkout logo and stale checkout left-column assignment were corrected during
+this pass. Authenticated account
+tables, later checkout steps and order confirmation still require data-backed
+verification; the global responsive rules provide scroll containment for their
+tables and module-owned content in the meantime.
+
 ## P1: global layout and navigation
 
 | Area | Legacy source | v2 strategy | Status |
