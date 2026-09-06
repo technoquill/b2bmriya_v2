@@ -2246,6 +2246,11 @@ body.b2b-panel-open {
   margin: 0;
 }
 
+#index .cpcategorylist {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 #index .cp-carousel {
   display: grid;
   grid-auto-columns: calc((100% - 4rem) / 5);
