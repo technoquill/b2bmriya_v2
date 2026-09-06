@@ -4,7 +4,7 @@
 
 <div class="footer-container">
   <div class="footer-before-part">
-    <div class="container">
+    <div class="wrapper-container">
       {block name='hook_footer_before'}
         {hook h='displayFooterBefore'}
       {/block}
@@ -12,7 +12,7 @@
   </div>
 
   <div class="footer-middle-part">
-    <div class="container">
+    <div class="wrapper-container">
       <div class="row">
         <div class="footer-contact col-xs-12 col-md-4">
           {hook h='displayFooterleft'}
@@ -32,7 +32,7 @@
   </div>
 
   <div class="footer-after-part">
-    <div class="container">
+    <div class="wrapper-container">
       <div class="row">
         <div class="col-xs-12">
           <p class="copyright">

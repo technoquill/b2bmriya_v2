@@ -13,12 +13,13 @@
 
 {block name='header_nav'}
   <nav class="header-nav" aria-label="{l s='Store utilities' d='Shop.Theme.Global'}">
-    <div class="container">
+    <div class="wrapper-container">
       <div class="left-nav">
         {hook h='displayNav1'}
       </div>
       <div class="right-nav">
-        {hook h='displayNav2'}
+        {hook h='displayNav2' mod='ps_languageselector'}
+        {hook h='displayNav2' mod='ps_customersignin'}
       </div>
     </div>
   </nav>
@@ -27,7 +28,11 @@
 {block name='header_top'}
   <div class="header-top header-top-main bg_main">
     <div class="header-div">
-      <div class="container">
+      <div class="wrapper-container">
+        <div class="header-center">
+          {hook h='displayHeaderCenter'}
+        </div>
+
         <div class="header-left">
           <div class="header_logo" id="_desktop_logo">
             {if $shop.logo_details}
@@ -38,10 +43,6 @@
               {/if}
             {/if}
           </div>
-        </div>
-
-        <div class="header-center">
-          {hook h='displayHeaderCenter'}
         </div>
 
         <div class="header-right">

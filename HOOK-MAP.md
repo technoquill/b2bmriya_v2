@@ -35,14 +35,12 @@ used.
 | Hook | Position | Module | Decision |
 | --- | ---: | --- | --- |
 | `displayNav2` | 1 | `ps_languageselector` | keep current module, reproduce legacy placement |
-| `displayNav2` | 2 | `ps_currencyselector` | keep current module, reproduce legacy placement |
-| `displayNav2` | 3 | `ps_customersignin` | keep current module and account behavior |
+| `displayNav2` | 2 | `ps_customersignin` | keep current module and account behavior |
 | `displayHeaderCenter` | 1 | `cp_sideverticalmenu` | retain initially; audit and modernize its mobile behavior |
 | `displayHeaderRight` | 1 | `cp_blocksearch` | retain module placement; use the native PrestaShop 8 search endpoint and presenter in the v2 override |
 | `displayHeaderRight` | 2 | `ps_shoppingcart` | keep current module contract; recreate the legacy visual mini-cart safely |
 | `displayCustomerSide` | 1 | `ps_customersignin` | retain for the vertical mobile panel |
-| `displaySide` | 1 | `ps_currencyselector` | retain for the vertical mobile panel |
-| `displaySide` | 2 | `ps_languageselector` | retain for the vertical mobile panel |
+| `displaySide` | 1 | `ps_languageselector` | retain for the vertical mobile panel |
 
 `displayNavFullWidth` contains `blockreassurance`, but the legacy header did not
 render this hook. It remains registered for compatibility and is not used as an

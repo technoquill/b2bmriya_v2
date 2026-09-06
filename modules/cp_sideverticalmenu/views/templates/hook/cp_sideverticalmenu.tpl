@@ -11,10 +11,11 @@
       data-b2b-menu-open
       aria-controls="cp_sidevertical_menu_top"
       aria-expanded="false"
+      aria-label="{l s='Browse Categories ' mod='cp_sideverticalmenu'}"
     >
       <span class="cat-title">
         <i class="material-icons menu-open" aria-hidden="true">menu</i>
-        {l s='Browse Categories ' mod='cp_sideverticalmenu'}
+        <span class="b2b-category-label">{l s='Browse Categories ' mod='cp_sideverticalmenu'}</span>
       </span>
     </button>
   </div>
@@ -95,6 +96,6 @@
       {hook h='displayStWishlistTopLink'}
       {hook h='displayStCompareTopLink'}
     </div>
-    {hook h='displaySide'}
+    {hook h='displaySide' mod='ps_languageselector'}
   </div>
 </aside>
