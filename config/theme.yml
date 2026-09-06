@@ -2,7 +2,7 @@ parent: classic
 
 name: b2b_mriya_v2
 display_name: B2B Mriya v2
-version: 0.4.1
+version: 0.4.2
 
 author:
   name: "Mykhailo Kulyk"
@@ -59,7 +59,6 @@ global_settings:
       - cp_themeoptions
       - ps_categorytree
       - ps_contactinfo
-      - ps_currencyselector
       - ps_customersignin
       - ps_languageselector
       - ps_linklist
@@ -68,6 +67,7 @@ global_settings:
     to_disable:
       - blockwishlist
       - productcomments
+      - ps_currencyselector
       - ps_imageslider
       - ps_mainmenu
       - ps_searchbar
@@ -81,7 +81,6 @@ global_settings:
         - blockreassurance
       displayNav2:
         - ps_languageselector
-        - ps_currencyselector
         - ps_customersignin
       displayHeaderCenter:
         - cp_sideverticalmenu
@@ -126,7 +125,6 @@ global_settings:
       displayCustomerSide:
         - ps_customersignin
       displaySide:
-        - ps_currencyselector
         - ps_languageselector
       displayFooterleft:
         - ps_contactinfo

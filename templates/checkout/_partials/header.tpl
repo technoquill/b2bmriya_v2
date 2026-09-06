@@ -8,7 +8,7 @@
 
 {block name='header_nav'}
   <nav class="header-nav b2b-checkout-header" aria-label="{l s='Checkout' d='Shop.Theme.Checkout'}">
-    <div class="container">
+    <div class="wrapper-container">
       <div class="b2b-checkout-logo">
         <a href="{$urls.pages.index}" aria-label="{$shop.name}">
           {renderLogo}

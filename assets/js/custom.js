@@ -93,6 +93,36 @@
     });
   };
 
+  /**
+   * Replaces obfuscated email spans (for example, "name at domain dot ua")
+   * with clickable mailto links.
+   */
+  const emailsMask = (root = document) => {
+    const emailSpans = root.matches?.('span.mail')
+      ? [root]
+      : Array.from(root.querySelectorAll?.('span.mail') || []);
+
+    emailSpans.forEach((emailSpan) => {
+      const address = emailSpan.textContent
+        .trim()
+        .replace(/ at /i, '@')
+        .replace(/ dot /gi, '.');
+
+      if (!address.includes('@')) {
+        return;
+      }
+
+      const link = document.createElement('a');
+      const text = document.createElement('span');
+
+      link.className = 'mail';
+      link.href = `mailto:${address}`;
+      text.textContent = address;
+      link.appendChild(text);
+      emailSpan.replaceWith(link);
+    });
+  };
+
   const getOverlay = () => document.querySelector('[data-b2b-overlay]');
 
   const showOverlay = () => {
@@ -536,6 +566,7 @@
   const initialize = () => {
     hydrateLazyImages();
     syncEmptyProductMessages();
+    emailsMask();
     initializeCarousels();
     initializeSearch();
 
@@ -560,6 +591,7 @@
         mutation.addedNodes.forEach((node) => {
           if (node.nodeType === Node.ELEMENT_NODE) {
             hydrateLazyImages(node);
+            emailsMask(node);
           }
         });
       });

@@ -23,20 +23,34 @@
       <li class="phone-block">
         <ul class="block-items">
           {foreach from=$contact_infos.phonesSemicolonToHtml item=phone}
-            <li><a href="tel:{$phone.formatted}">{$phone.origin}</a></li>
+            <li>
+              <a href="tel:{$phone.formatted}">
+                <i class="material-icons b2b-contact-icon" aria-hidden="true">phone</i>
+                <span>{$phone.origin}</span>
+              </a>
+            </li>
           {/foreach}
         </ul>
       </li>
     {elseif $contact_infos.phone}
       <li class="phone-block">
-        <a href="tel:{$contact_infos.phone|replace:' ':''}">{$contact_infos.phone}</a>
+        <a href="tel:{$contact_infos.phone|replace:' ':''}">
+          <i class="material-icons b2b-contact-icon" aria-hidden="true">phone</i>
+          <span>{$contact_infos.phone}</span>
+        </a>
       </li>
     {/if}
 
     {if isset($contact_infos.maskEmail) && $contact_infos.maskEmail}
-      <li class="email-block">{$contact_infos.maskEmail nofilter}</li>
+      <li class="email-block">
+        <i class="material-icons b2b-contact-icon" aria-hidden="true">email</i>
+        {$contact_infos.maskEmail nofilter}
+      </li>
     {elseif $contact_infos.email && $display_email}
-      <li class="email-block">{mailto address=$contact_infos.email encode='javascript'}</li>
+      <li class="email-block">
+        <i class="material-icons b2b-contact-icon" aria-hidden="true">email</i>
+        {mailto address=$contact_infos.email encode='javascript'}
+      </li>
     {/if}
   </ul>
 </div>
