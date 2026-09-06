@@ -2480,8 +2480,8 @@ body.b2b-panel-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 110px;
-  padding: 1rem;
+  min-height: 126px;
+  padding: 0.5rem;
   background: #fff;
   border: 1px solid var(--b2b-border);
 }
@@ -2491,7 +2491,8 @@ body.b2b-panel-open {
   width: auto;
   max-width: 100%;
   height: auto;
-  max-height: 72px;
+  max-height: 110px;
+  object-fit: contain;
 }
 
 #index .brands .product-title {
