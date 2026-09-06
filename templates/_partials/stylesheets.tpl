@@ -7,7 +7,7 @@
 {foreach $stylesheets.external as $stylesheet}
   <link
     rel="stylesheet"
-    href="{$stylesheet.uri}{if $stylesheet.uri == $themeCustomCss}?v=0.4.3{/if}"
+    href="{$stylesheet.uri}{if $stylesheet.uri == $themeCustomCss}?v=0.4.4{/if}"
     type="text/css"
     media="{$stylesheet.media}"
   >
