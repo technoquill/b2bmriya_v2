@@ -74,6 +74,14 @@ the supplied shop state.
 
 ## Sidebars and product helpers
 
+`amazzingfilter` must also be registered on the service hook
+`productSearchProvider`. This makes the initial catalogue request use the same
+configured sorting options, filtered products and pagination as the module's
+AJAX responses. A sidebar/header registration alone leaves the initial request
+on the core search provider. The theme declares this hook in `theme.yml`;
+existing installations need the missing registration restored through
+`Module::getInstanceByName('amazzingfilter')->registerHook('productSearchProvider', [$idShop])`.
+
 | Hook | Position | Module |
 | --- | ---: | --- |
 | `displayLeftColumn` | 1 | `amazzingfilter` |

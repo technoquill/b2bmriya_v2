@@ -16,7 +16,7 @@
       data-b2b-cart-open
       aria-controls="b2b-mini-cart"
       aria-expanded="false"
-      aria-label="{l s='Shopping cart containing %count% product(s)' sprintf=['%count%' => $cart.products_count] d='Shop.Theme.Checkout'}"
+      aria-label="{l s='Shopping cart link containing %nbProducts% product(s)' sprintf=['%nbProducts%' => $cart.products_count] d='Shop.Theme.Checkout'}"
     >
       <i class="material-icons" aria-hidden="true">shopping_basket</i>
       <span class="cart-products-counthome">{$cart.products_count}</span>
@@ -29,11 +29,11 @@
       role="dialog"
       aria-modal="true"
       aria-hidden="true"
-      aria-label="{l s='Shopping cart' d='Shop.Theme.Checkout'}"
+      aria-label="{l s='Shopping Cart' d='Shop.Theme.Checkout'}"
       inert
     >
       <div class="b2b-mini-cart-header">
-        <h2>{l s='Shopping cart' d='Shop.Theme.Checkout'} ({$cart.products_count})</h2>
+        <h2>{l s='Shopping Cart' d='Shop.Theme.Checkout'} ({$cart.products_count})</h2>
         <button class="b2b-mini-cart-close" type="button" data-b2b-cart-close aria-label="{l s='Close' d='Shop.Theme.Global'}">
           <i class="material-icons" aria-hidden="true">close</i>
         </button>
@@ -98,7 +98,7 @@
         </div>
 
         <div class="b2b-mini-cart-actions">
-          <a class="btn btn-secondary" href="{$cart_url}" rel="nofollow">{l s='View cart' d='Shop.Theme.Actions'}</a>
+          <a class="btn btn-secondary" href="{$cart_url}" rel="nofollow">{l s='View Cart' d='Shop.Theme.Global'}</a>
           <a class="btn btn-primary" href="{$urls.pages.order}" rel="nofollow">{l s='Checkout' d='Shop.Theme.Actions'}</a>
         </div>
       {else}

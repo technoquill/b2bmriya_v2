@@ -24,7 +24,8 @@
         </div>
         <div class="footer-support col-xs-12 col-md-5">
           {block name='hook_footer_after'}
-            {hook h='displayFooterAfter'}
+            {capture assign='b2bFooterAfter'}{hook h='displayFooterAfter'}{/capture}
+            {$b2bFooterAfter|replace:'tel:200800210247':'tel:0800210247' nofilter}
           {/block}
         </div>
       </div>

@@ -91,11 +91,6 @@
   </nav>
 
   <div class="verticalmenu-side">
-    <div class="vertical-side-top-text">
-      {hook h='displayCustomerSide'}
-      {hook h='displayStWishlistTopLink'}
-      {hook h='displayStCompareTopLink'}
-    </div>
     {hook h='displaySide' mod='ps_languageselector'}
   </div>
 </aside>
