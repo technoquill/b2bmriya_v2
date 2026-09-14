@@ -75,6 +75,8 @@ global_settings:
 
   hooks:
     modules_to_hook:
+      productSearchProvider:
+        - amazzingfilter
       displayBackOfficeHeader:
         - stfeature
       displayAfterBodyOpeningTag:

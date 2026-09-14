@@ -36,14 +36,14 @@
     autocomplete="off"
   >
     <input type="hidden" name="controller" value="search">
-    <label class="sr-only" for="b2b-search-input">{l s='Search products' mod='cp_blocksearch'}</label>
+    <label class="sr-only" for="b2b-search-input">Назва, артикул або бренд</label>
     <input
       id="b2b-search-input"
       class="b2b-search-input"
       type="search"
       name="s"
       value="{$search_query|escape:'htmlall':'UTF-8'}"
-      placeholder="{l s='Search Product Here...' mod='cp_blocksearch'}"
+      placeholder="Назва, артикул або бренд"
       aria-autocomplete="list"
       aria-controls="b2b-search-results"
       aria-expanded="false"
