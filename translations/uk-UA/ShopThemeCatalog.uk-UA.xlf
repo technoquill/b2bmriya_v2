@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="b2b_mriya_v2" source-language="en" target-language="uk" datatype="plaintext">
+    <body>
+      <trans-unit id="83e2aa2519c14e04d6d5390d41a76f5a" approved="yes">
+        <source>All specifications (%count%)</source>
+        <target state="final">Усі характеристики (%count%)</target>
+      </trans-unit>
+      <trans-unit id="c5f9f06dd4f2056c02947c5bc115320c" approved="yes">
+        <source>Choose a subcategory</source>
+        <target state="final">Оберіть підкатегорію</target>
+      </trans-unit>
+      <trans-unit id="b2eb7eb5ea59e7426dd3c8ed7b1876ff" approved="yes">
+        <source>Need help choosing?</source>
+        <target state="final">Потрібна допомога з підбором?</target>
+      </trans-unit>
+      <trans-unit id="e688669e439a69f6935448a0ac8e48bc" approved="yes">
+        <source>Contact a manager</source>
+        <target state="final">Зв’язатися з менеджером</target>
+      </trans-unit>
+      <trans-unit id="449f7089ed7983e163486f5801b72e15" approved="yes">
+        <source>View category</source>
+        <target state="final">Переглянути</target>
+      </trans-unit>
+      <trans-unit id="c63cd5d5b50dee1b2e6260c629e16308" approved="yes">
+        <source>Products: %count%</source>
+        <target state="final">Товарів: %count%</target>
+      </trans-unit>
+      <trans-unit id="f3f43e30c8c7d78c6ac0173515e57a00" approved="yes">
+        <source>Filters</source>
+        <target state="final">Фільтри</target>
+      </trans-unit>
+      <trans-unit id="1f2968e157cd41346ac37b757ea50c9c" approved="yes">
+        <source>Close filters</source>
+        <target state="final">Закрити фільтри</target>
+      </trans-unit>
+      <trans-unit id="7eece51cf3938103677db7a5051ef8f5" approved="yes">
+        <source>Compare</source>
+        <target state="final">Порівняти</target>
+      </trans-unit>
+      <trans-unit id="06b00cb6eec2e5d5231234b31557a1a0" approved="yes">
+        <source>In comparison</source>
+        <target state="final">У порівнянні</target>
+      </trans-unit>
+      <trans-unit id="f319172d681bb453e2d8e26d35c54f3f" approved="yes">
+        <source>Name, reference or brand</source>
+        <target state="final">Назва, артикул або бренд</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

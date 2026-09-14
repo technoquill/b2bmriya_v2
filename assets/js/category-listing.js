@@ -4,7 +4,8 @@
     if (document.body.id !== 'category') return;
     const filter = document.getElementById('amazzing_filter');
     const content = document.getElementById('content-wrapper');
-    if (!content) return;
+    const strings = document.getElementById('b2b-listing-i18n')?.dataset;
+    if (!content || !strings) return;
     let scheduled = false;
     let wasOpen = false;
     const setText = (element, text) => {
@@ -21,7 +22,7 @@
           const button = document.createElement('button');
           button.type = 'button';
           button.className = 'btn b2b-filter-open';
-          button.textContent = 'Фільтри';
+          button.textContent = strings.filters;
           button.setAttribute('aria-controls', 'amazzing_filter');
           button.addEventListener('click', toggle);
           sort.prepend(button);
@@ -29,13 +30,15 @@
         if (!filter.querySelector('.b2b-filter-heading')) {
           const heading = document.createElement('div');
           heading.className = 'b2b-filter-heading';
-          heading.innerHTML = '<strong id="b2b-filter-title">Фільтри</strong><button type="button" class="b2b-filter-close" aria-label="Закрити фільтри">×</button>';
+          heading.innerHTML = '<strong id="b2b-filter-title"></strong><button type="button" class="b2b-filter-close">×</button>';
+          setText(heading.querySelector('strong'), strings.filters);
+          heading.querySelector('button').setAttribute('aria-label', strings.closeFilters);
           heading.querySelector('button').addEventListener('click', toggle);
           filter.prepend(heading);
           const reset = document.createElement('button');
           reset.type = 'button';
           reset.className = 'b2b-filter-reset';
-          reset.textContent = 'Скинути фільтри';
+          reset.textContent = strings.resetFilters;
           reset.addEventListener('click', () => filter.querySelector('.clearAll .all')?.click());
           filter.querySelector('.btn-holder')?.prepend(reset);
         }
@@ -50,18 +53,6 @@
           filter.removeAttribute('aria-modal');
           filter.removeAttribute('aria-labelledby');
         }
-        setText(filter.querySelector('.title_block'), 'Фільтри');
-        setText(filter.querySelector('.compact-toggle-text'), 'Фільтри');
-        setText(filter.querySelector('.clearAll .txt'), 'Скинути');
-        filter.querySelectorAll('.toggle-cut-off .more').forEach(el => setText(el, 'Показати ще'));
-        filter.querySelectorAll('.toggle-cut-off .less').forEach(el => setText(el, 'Згорнути'));
-        setText(filter.querySelector('.toggleMoreFilters .more-txt'), 'Більше фільтрів');
-        setText(filter.querySelector('.toggleMoreFilters .less-txt'), 'Менше фільтрів');
-        const view = filter.querySelector('.viewFilteredProducts');
-        if (view) {
-          const textNode = Array.from(view.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
-          if (textNode && textNode.textContent !== 'Показати товари ') textNode.textContent = 'Показати товари ';
-        }
         filter.querySelectorAll('.af_subtitle').forEach(el => {
           if (!el.hasAttribute('tabindex')) {
             el.tabIndex = 0;
@@ -75,11 +66,12 @@
       }
       content.querySelectorAll('.st-compare-button').forEach(button => {
         const added = button.classList.contains('added');
-        const text = added ? 'У порівнянні' : 'Порівняти';
+        const text = added ? strings.inComparison : strings.compare;
         setText(button.querySelector('.st-compare-title'), text);
-        const label = added ? 'Видалити з порівняння' : 'Додати до порівняння';
+        // The comparison module already translates its title and updates it
+        // when selection changes; reuse that text for the accessible name.
+        const label = button.title;
         if (button.getAttribute('aria-label') !== label) button.setAttribute('aria-label', label);
-        if (button.title !== label) button.title = label;
       });
       if (open !== wasOpen) {
         if (open) filter.querySelector('.b2b-filter-close')?.focus();

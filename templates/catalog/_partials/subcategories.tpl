@@ -9,11 +9,11 @@
                 {/if}
               </span>
               <h2>{$subcategory.name|escape:'html':'UTF-8'}</h2>
-              <span class="b2b-category-count" data-category-count></span>
-              <span class="b2b-category-action" aria-hidden="true">Переглянути <span>→</span></span>
+              <span class="b2b-category-count" data-category-count="{l s='Products: %count%' d='Shop.Theme.Catalog'}"></span>
+              <span class="b2b-category-action" aria-hidden="true">{l s='View category' d='Shop.Theme.Catalog'} <span>→</span></span>
             </a>
           </li>
         {/foreach}
       </ul>
-  <script src="{$urls.base_url}themes/b2b_mriya_v2/assets/js/category-hub.js?v=1" defer></script>
+  <script src="{$urls.base_url}themes/b2b_mriya_v2/assets/js/category-hub.js?v=2" defer></script>
 {/if}

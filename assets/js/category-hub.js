@@ -19,7 +19,7 @@
           .then(response => response.ok ? response.json() : null)
           .then(data => {
             const count = data?.pagination?.total_items;
-            if (Number.isInteger(count) && count >= 0) label.textContent = `Товарів: ${count}`;
+            if (Number.isInteger(count) && count >= 0) label.textContent = label.dataset.categoryCount.replace('%count%', String(count));
           })
           .catch(() => {})
           .finally(() => { clearTimeout(timer); active--; drain(); });
