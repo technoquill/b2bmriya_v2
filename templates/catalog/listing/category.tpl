@@ -5,12 +5,12 @@
     <section id="main" class="b2b-category-hub">
       <header class="b2b-category-hub-header">
         <h1>{$category.name|escape:'html':'UTF-8'}</h1>
-        <p>Оберіть підкатегорію</p>
+        <p>{l s='Choose a subcategory' d='Shop.Theme.Catalog'}</p>
       </header>
       {include file='catalog/_partials/subcategories.tpl'}
       <aside class="b2b-category-help">
-        <span>Потрібна допомога з підбором?</span>
-        <a href="{$urls.pages.contact|escape:'html':'UTF-8'}">Зв’язатися з менеджером →</a>
+        <span>{l s='Need help choosing?' d='Shop.Theme.Catalog'}</span>
+        <a href="{$urls.pages.contact|escape:'html':'UTF-8'}">{l s='Contact a manager' d='Shop.Theme.Catalog'} →</a>
       </aside>
       {hook h='displayFooterCategory'}
     </section>
@@ -26,5 +26,5 @@
       <div class="b2b-category-description">{$category.description nofilter}</div>
     {/if}
   </header>
-  <script src="{$urls.base_url}themes/b2b_mriya_v2/assets/js/category-listing.js?v=3" defer></script>
+  {include file='catalog/_partials/listing-controls.tpl'}
 {/block}

@@ -23,6 +23,14 @@ configuration. B2B rules stay in modules, PrestaShop data and services.
   modules and hook positions.
 - Do not revive a disabled legacy module merely because it is listed in the old
   `theme.yml`.
+- Use existing PrestaShop translation keys for standard interface text. Add new
+  theme strings through `{l}` and `translations/<locale>/*.xlf`; pass translated
+  labels to JavaScript through escaped `data-*` attributes.
+- Amazzing Filter uses legacy module translations. Its Ukrainian storefront
+  corrections live in `modules/amazzingfilter/translations/uk.php`, so both the
+  initial search provider and AJAX return translated labels directly.
+- After adding translation catalogues to an existing installation, invalidate
+  its generated translation cache so PrestaShop discovers the new resources.
 
 ## Current state
 
