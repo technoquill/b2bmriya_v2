@@ -1,7 +1,7 @@
 {extends file='parent:catalog/_partials/miniatures/product.tpl'}
 
 {block name='product_name'}
-  {if $page.page_name == 'category'}
+  {if ($page.page_name == 'category' || $page.page_name == 'manufacturer')}
     <h2 class="h3 product-title"><a href="{$product.url|escape:'html':'UTF-8'}">{$product.name|escape:'html':'UTF-8'}</a></h2>
     {if !empty($product.reference_to_display)}
       <p class="b2b-product-reference">{l s='Reference' d='Shop.Theme.Catalog'}: {$product.reference_to_display|escape:'html':'UTF-8'}</p>
@@ -40,7 +40,7 @@
 
 {block name='product_reviews'}
   {$smarty.block.parent}
-  {if $page.page_name == 'category'}
+  {if ($page.page_name == 'category' || $page.page_name == 'manufacturer')}
     <div class="b2b-product-actions">
       {if !$configuration.is_catalog && $product.add_to_cart_url && !$product.is_customizable && !$product.id_product_attribute}
         <form action="{$urls.pages.cart|escape:'html':'UTF-8'}" method="post">

@@ -1,7 +1,7 @@
-/* Presentation adapters for category listings; filtering and commerce remain native. */
+/* Presentation adapters for category and brand listings; filtering and commerce remain native. */
 (() => {
   const initialize = () => {
-    if (document.body.id !== 'category') return;
+    if (!['category', 'manufacturer'].includes(document.body.id)) return;
     const filter = document.getElementById('amazzing_filter');
     const content = document.getElementById('content-wrapper');
     const strings = document.getElementById('b2b-listing-i18n')?.dataset;
