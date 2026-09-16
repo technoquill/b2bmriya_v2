@@ -11,6 +11,8 @@
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let lastFocusedElement = null;
+  let keepCartOpenAfterRefresh = false;
+  let cartRefreshTimeout = null;
 
   const scrollCarousel = (element, direction) => {
     if (!element) {
@@ -151,7 +153,7 @@
     }, reducedMotion.matches ? 0 : 180);
   };
 
-  const openCart = (trigger) => {
+  const openCart = (trigger, { focusClose = true } = {}) => {
     const panel = document.querySelector('.b2b-mini-cart');
 
     if (!panel) {
@@ -168,7 +170,7 @@
     showOverlay();
 
     const closeButton = panel.querySelector('[data-b2b-cart-close]');
-    if (closeButton) {
+    if (focusClose && closeButton) {
       closeButton.focus();
     }
 
@@ -183,6 +185,8 @@
       return;
     }
 
+    keepCartOpenAfterRefresh = false;
+    window.clearTimeout(cartRefreshTimeout);
     panel.classList.remove('is-open');
     panel.setAttribute('aria-hidden', 'true');
     panel.setAttribute('inert', '');
@@ -197,6 +201,33 @@
     if (restoreFocus && lastFocusedElement && document.contains(lastFocusedElement)) {
       lastFocusedElement.focus();
     }
+  };
+
+  const preserveOpenCartDuringRefresh = () => {
+    keepCartOpenAfterRefresh = true;
+    window.clearTimeout(cartRefreshTimeout);
+    cartRefreshTimeout = window.setTimeout(() => {
+      keepCartOpenAfterRefresh = false;
+    }, 10000);
+  };
+
+  const restoreOpenCartAfterRefresh = (root) => {
+    if (!keepCartOpenAfterRefresh) {
+      return;
+    }
+
+    const blockcart = root.matches?.('.b2b-blockcart')
+      ? root
+      : root.querySelector?.('.b2b-blockcart');
+    const trigger = blockcart?.querySelector('[data-b2b-cart-open]');
+
+    if (!trigger) {
+      return;
+    }
+
+    keepCartOpenAfterRefresh = false;
+    window.clearTimeout(cartRefreshTimeout);
+    openCart(trigger, { focusClose: false });
   };
 
   const openVerticalMenu = (trigger) => {
@@ -592,6 +623,7 @@
           if (node.nodeType === Node.ELEMENT_NODE) {
             hydrateLazyImages(node);
             emailsMask(node);
+            restoreOpenCartAfterRefresh(node);
           }
         });
       });
@@ -681,7 +713,11 @@
   });
 
   if (window.prestashop?.on) {
-    window.prestashop.on('updateCart', () => closeCart({ restoreFocus: false }));
+    window.prestashop.on('updateCart', () => {
+      if (document.querySelector('.b2b-mini-cart.is-open')) {
+        preserveOpenCartDuringRefresh();
+      }
+    });
   }
 
   if (document.readyState === 'loading') {
