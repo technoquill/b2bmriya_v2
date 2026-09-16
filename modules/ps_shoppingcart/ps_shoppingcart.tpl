@@ -19,7 +19,7 @@
       aria-label="{l s='Shopping cart link containing %nbProducts% product(s)' sprintf=['%nbProducts%' => $cart.products_count] d='Shop.Theme.Checkout'}"
     >
       <i class="material-icons" aria-hidden="true">shopping_basket</i>
-      <span class="cart-products-counthome">{$cart.products_count}</span>
+      <span class="cart-products-counthome{if $cart.products_count <= 0} is-empty{/if}">{$cart.products_count}</span>
       <span class="hidden-sm-down b2b-cart-label">{l s='Cart' d='Shop.Theme.Checkout'}</span>
     </a>
 

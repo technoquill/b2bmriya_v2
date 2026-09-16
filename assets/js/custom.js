@@ -95,6 +95,15 @@
     });
   };
 
+  const syncHeaderCounters = () => {
+    const selector = '.cart-products-counthome, .ap-total-wishlist, .ap-total-compare';
+
+    document.querySelectorAll(selector).forEach((counter) => {
+      const count = Number.parseInt(counter.textContent.trim(), 10);
+      counter.classList.toggle('is-empty', Number.isFinite(count) && count <= 0);
+    });
+  };
+
   /**
    * Replaces obfuscated email spans (for example, "name at domain dot ua")
    * with clickable mailto links.
@@ -597,6 +606,7 @@
   const initialize = () => {
     hydrateLazyImages();
     syncEmptyProductMessages();
+    syncHeaderCounters();
     emailsMask();
     initializeCarousels();
     initializeSearch();
@@ -629,6 +639,7 @@
       });
 
       syncEmptyProductMessages();
+      syncHeaderCounters();
     });
 
     observer.observe(document.body, { childList: true, subtree: true });

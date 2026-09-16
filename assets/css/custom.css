@@ -2929,6 +2929,14 @@ a:focus {
   line-height: 1;
   background: var(--b2b-primary);
   border-radius: 999px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+#header .cart-products-counthome.is-empty,
+#header .ap-total-wishlist.is-empty,
+#header .ap-total-compare.is-empty {
+  color: #dfe3e8;
+  background: #62666c;
 }
 
 .header-top-main.fixed {
