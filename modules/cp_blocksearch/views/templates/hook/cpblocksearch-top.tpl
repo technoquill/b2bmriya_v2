@@ -10,11 +10,12 @@
   data-b2b-search
   data-search-url="{$search_controller_url|escape:'html':'UTF-8'}"
   data-min-length="3"
-  data-loading-text="{l s='Searching…' mod='cp_blocksearch'}"
-  data-min-length-text="{l s='Enter at least 3 characters.' mod='cp_blocksearch'}"
-  data-empty-text="{l s='No products found.' mod='cp_blocksearch'}"
-  data-error-text="{l s='Search is temporarily unavailable.' mod='cp_blocksearch'}"
-  data-view-all-text="{l s='View all results' mod='cp_blocksearch'}"
+  data-loading-text="Пошук…"
+  data-min-length-text="Введіть щонайменше 3 символи."
+  data-empty-text="Товарів не знайдено."
+  data-error-text="Пошук тимчасово недоступний."
+  data-view-all-text="Переглянути всі результати"
+  data-results-text="Знайдено товарів: %count%"
 >
   <button
     class="b2b-search-toggle"
@@ -22,7 +23,7 @@
     data-b2b-search-toggle
     aria-controls="b2b-search-form"
     aria-expanded="false"
-    aria-label="{l s='Search' mod='cp_blocksearch'}"
+    aria-label="Пошук"
   >
     <i class="material-icons" aria-hidden="true">search</i>
   </button>
@@ -51,7 +52,7 @@
       autocomplete="off"
       spellcheck="false"
     >
-    <button class="b2b-search-submit" type="submit" aria-label="{l s='Search' mod='cp_blocksearch'}">
+    <button class="b2b-search-submit" type="submit" aria-label="Пошук">
       <i class="material-icons" aria-hidden="true">search</i>
     </button>
   </form>

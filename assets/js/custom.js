@@ -514,7 +514,7 @@
         allResultsLink.textContent = search.dataset.viewAllText;
 
         results.replaceChildren(list, allResultsLink);
-        status.textContent = `${safeProducts.length} ${search.dataset.viewAllText}`;
+        status.textContent = search.dataset.resultsText.replace('%count%', safeProducts.length);
         setExpanded(true);
       };
 
