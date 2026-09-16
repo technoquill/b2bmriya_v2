@@ -1035,6 +1035,12 @@ body#product #main .b2b-product-secondary-actions .dropdown-menu {
   z-index: 1040;
 }
 
+.st-modal-compare .modal-title .btn,
+.st-modal-compare .modal-title .btn:hover,
+.st-modal-compare .modal-title .btn:focus {
+  color: #fff;
+}
+
 body#product #main .blockreassurance_product {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
