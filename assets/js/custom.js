@@ -752,6 +752,217 @@
   }
 })();
 
+/** Product comparison enhancements for the retained stfeature module. */
+(() => {
+  'use strict';
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const initializeComparison = () => {
+    const root = document.querySelector('[data-b2b-compare]');
+
+    if (!root) {
+      return;
+    }
+
+    const table = root.querySelector('.b2b-compare-table');
+    const scrollContainer = root.querySelector('[data-b2b-compare-scroll-container]');
+    const differencesToggle = root.querySelector('[data-b2b-differences-toggle]');
+    const modeText = root.querySelector('[data-b2b-compare-mode]');
+    const countText = root.querySelector('[data-b2b-compare-count]');
+    const status = root.querySelector('[data-b2b-compare-status]');
+    const clearButton = root.querySelector('[data-b2b-clear-compare]');
+    const endpoint = root.dataset.compareUrl || window.productcompare_url || window.location.href;
+
+    if (!table || !scrollContainer) {
+      return;
+    }
+
+    const getProductCells = () => Array.from(table.querySelectorAll('[data-b2b-compare-product]'));
+
+    const setStatus = (message) => {
+      if (status) {
+        status.textContent = message;
+      }
+    };
+
+    const syncRows = () => {
+      const showDifferences = Boolean(differencesToggle?.checked);
+      const productCount = getProductCells().length;
+
+      table.querySelectorAll('[data-b2b-compare-row]').forEach((row) => {
+        const values = Array.from(row.querySelectorAll('[data-b2b-compare-value]'))
+          .map((cell) => cell.textContent.replace(/\s+/g, ' ').trim());
+        const isIdentical = productCount > 1 && new Set(values).size <= 1;
+
+        row.classList.toggle('is-identical', showDifferences && isIdentical);
+      });
+
+      if (modeText) {
+        modeText.textContent = showDifferences
+          ? 'Показано лише відмінні характеристики'
+          : 'Показано всі характеристики';
+      }
+    };
+
+    const syncScrollButtons = () => {
+      const maxScroll = Math.max(0, scrollContainer.scrollWidth - scrollContainer.clientWidth);
+      const current = Math.abs(scrollContainer.scrollLeft);
+      const buttons = root.querySelectorAll('[data-b2b-compare-scroll]');
+
+      buttons.forEach((button) => {
+        const direction = Number(button.dataset.b2bCompareScroll);
+        button.disabled = maxScroll <= 1
+          || (direction < 0 && current <= 1)
+          || (direction > 0 && current >= maxScroll - 1);
+      });
+    };
+
+    const syncProductCount = () => {
+      const count = getProductCells().length;
+
+      if (countText) {
+        countText.textContent = `Товарів у порівнянні: ${count}`;
+      }
+
+      document.querySelectorAll('.ap-total-compare').forEach((counter) => {
+        counter.textContent = String(count);
+        counter.dataset.compareTotal = String(count);
+        counter.classList.toggle('is-empty', count === 0);
+      });
+
+      if (differencesToggle) {
+        differencesToggle.disabled = count < 2;
+
+        if (count < 2) {
+          differencesToggle.checked = false;
+        }
+      }
+
+      syncRows();
+      window.requestAnimationFrame(syncScrollButtons);
+      return count;
+    };
+
+    const mutateComparison = async (idProduct) => {
+      const body = new URLSearchParams({
+        ajax: '1',
+        action: 'remove',
+        id_product: String(idProduct),
+      });
+      const response = await window.fetch(endpoint, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: body.toString(),
+      });
+      const result = (await response.text()).trim();
+
+      if (!response.ok || result !== '1') {
+        throw new Error('Comparison request failed');
+      }
+    };
+
+    const removeProductFromPage = (idProduct) => {
+      table.querySelectorAll(`.product-${idProduct}`).forEach((cell) => cell.remove());
+
+      if (Array.isArray(window.compared_products)) {
+        const index = window.compared_products.indexOf(Number(idProduct));
+
+        if (index >= 0) {
+          window.compared_products.splice(index, 1);
+        }
+      }
+
+      const count = syncProductCount();
+
+      if (count === 0) {
+        window.location.reload();
+      }
+    };
+
+    document.addEventListener('click', async (event) => {
+      const button = event.target.closest('[data-b2b-remove-compare]');
+
+      if (!button || !root.contains(button)) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      const idProduct = button.dataset.idProduct;
+
+      if (!/^\d+$/.test(idProduct || '')) {
+        return;
+      }
+
+      button.disabled = true;
+      setStatus('Видаляємо товар із порівняння…');
+
+      try {
+        await mutateComparison(idProduct);
+        removeProductFromPage(idProduct);
+        setStatus('Товар видалено з порівняння.');
+      } catch (error) {
+        button.disabled = false;
+        setStatus('Не вдалося оновити порівняння. Спробуйте ще раз.');
+      }
+    }, true);
+
+    differencesToggle?.addEventListener('change', syncRows);
+
+    root.querySelectorAll('[data-b2b-compare-scroll]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const direction = Number(button.dataset.b2bCompareScroll);
+        scrollContainer.scrollBy({
+          left: direction * Math.max(scrollContainer.clientWidth * 0.72, 240),
+          behavior: reducedMotion.matches ? 'auto' : 'smooth',
+        });
+      });
+    });
+
+    scrollContainer.addEventListener('scroll', syncScrollButtons, { passive: true });
+    window.addEventListener('resize', syncScrollButtons, { passive: true });
+
+    clearButton?.addEventListener('click', async () => {
+      const productIds = getProductCells().map((cell) => cell.dataset.idProduct).filter(Boolean);
+
+      if (!productIds.length || !window.confirm('Очистити всі товари з порівняння?')) {
+        return;
+      }
+
+      clearButton.disabled = true;
+      root.querySelectorAll('[data-b2b-remove-compare]').forEach((button) => {
+        button.disabled = true;
+      });
+      setStatus('Очищаємо порівняння…');
+
+      try {
+        await Promise.all(productIds.map(mutateComparison));
+        window.location.reload();
+      } catch (error) {
+        clearButton.disabled = false;
+        root.querySelectorAll('[data-b2b-remove-compare]').forEach((button) => {
+          button.disabled = false;
+        });
+        setStatus('Не вдалося очистити порівняння. Спробуйте ще раз.');
+      }
+    });
+
+    syncProductCount();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeComparison, { once: true });
+  } else {
+    initializeComparison();
+  }
+})();
+
 /**
  * Product gallery and full-screen image viewer.
  *
