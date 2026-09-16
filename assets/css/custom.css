@@ -4395,10 +4395,10 @@ a:focus-visible picture {
 }
 
 /* Parent category navigation: preserve catalogue ordering. */
-body:is(#category, #manufacturer) #wrapper .row:has(.b2b-category-hub) > #left-column {
+body:is(#category, #manufacturer, #search) #wrapper .row:has(.b2b-category-hub) > #left-column {
   display: none;
 }
-body:is(#category, #manufacturer) #content-wrapper:has(.b2b-category-hub) {
+body:is(#category, #manufacturer, #search) #content-wrapper:has(.b2b-category-hub) {
   width: 100%;
   flex: 0 0 100%;
   max-width: 100%;
@@ -4455,76 +4455,187 @@ body:is(#category, #manufacturer) #content-wrapper:has(.b2b-category-hub) {
 }
 @media (prefers-reduced-motion: reduce) { .b2b-category-card { transition: none; } }
 
-/* Category product listings: native filters, four columns at XL (1200px). */
-body:is(#category, #manufacturer) .b2b-listing-header { margin: 0 0 20px; }
-body:is(#category, #manufacturer) .b2b-listing-header h1 { margin: 0; font-size: clamp(24px, 2.5vw, 30px); line-height: 1.25; text-transform: none; }
-body:is(#category, #manufacturer) #js-product-list .products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 24px; }
-body:is(#category, #manufacturer) #js-product-list .products > .product { width: 100%; max-width: none; padding: 0; margin: 0; }
-body:is(#category, #manufacturer) #products .product-miniature { width: 100%; height: 100%; margin: 0; }
-body:is(#category, #manufacturer) #products .thumbnail-container { display: flex; flex-direction: column; width: 100%; height: 100%; margin: 0; padding: 16px; background: #fff; border: 1px solid var(--b2b-border); border-radius: 0; box-shadow: none; }
-body:is(#category, #manufacturer) #products .thumbnail-top { flex-shrink: 0; }
-body:is(#category, #manufacturer) #products .product-thumbnail { display: flex; height: 180px; align-items: center; justify-content: center; margin: 0 0 16px; }
-body:is(#category, #manufacturer) #products .product-thumbnail picture { display: flex; height: 100%; align-items: center; justify-content: center; }
-body:is(#category, #manufacturer) #products .product-thumbnail img { position: static; width: 100%; height: 100%; max-height: 180px; object-fit: contain; }
-body:is(#category, #manufacturer) #products .highlighted-informations { display: none; }
-body:is(#category, #manufacturer) #products .product-description { display: flex; flex-direction: column; flex: 1; position: static; width: 100%; height: auto; padding: 0; background: transparent; text-align: left; }
-body:is(#category, #manufacturer) #products .product-description::after { display: none; }
-body:is(#category, #manufacturer) #products .product-title { margin: 0 0 8px; text-align: left; }
-body:is(#category, #manufacturer) #products .product-title a { display: block; color: var(--b2b-secondary); font-size: 15px; font-weight: 600; line-height: 1.4; text-align: left; text-transform: none; white-space: normal; overflow: visible; text-overflow: clip; }
-body:is(#category, #manufacturer) .b2b-product-reference { margin: 0 0 6px; font-size: 12px; line-height: 1.4; color: var(--b2b-text-muted); overflow-wrap: anywhere; }
-body:is(#category, #manufacturer) .b2b-product-specs { margin: 8px 0 12px; font-size: 12px; line-height: 1.5; }
-body:is(#category, #manufacturer) .b2b-product-specs dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 8px; }
-body:is(#category, #manufacturer) .b2b-product-specs dt { font-weight: 400; color: var(--b2b-text-muted); }
-body:is(#category, #manufacturer) .b2b-product-specs dd { margin: 0; overflow-wrap: anywhere; font-weight: 600; color: var(--b2b-secondary); }
-body:is(#category, #manufacturer) .b2b-product-stock { margin: auto 0 8px; font-size: 12px; line-height: 1.4; color: var(--b2b-text-muted); }
-body:is(#category, #manufacturer) .b2b-stock-available { color: #276b3b; }
-body:is(#category, #manufacturer) #products .product-price-and-shipping { margin: 0 0 4px; text-align: left; }
-body:is(#category, #manufacturer) #products .price { font-size: 18px; line-height: 1.4; color: var(--b2b-primary); white-space: nowrap; }
-body:is(#category, #manufacturer) .b2b-product-actions { display: grid; gap: 8px; margin-top: 8px; }
-body:is(#category, #manufacturer) .b2b-product-actions .btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 44px; padding: 8px; font-size: 13px; font-weight: 600; text-transform: none; border-radius: 0; box-shadow: none; }
-body:is(#category, #manufacturer) .b2b-product-actions .btn-primary { color: #fff; background: var(--b2b-primary); border: 1px solid var(--b2b-primary); }
-body:is(#category, #manufacturer) .b2b-product-actions .compare { position: static; display: block; }
-body:is(#category, #manufacturer) .b2b-product-actions .st-compare-button { color: var(--b2b-secondary); background: #fff; border: 1px solid var(--b2b-border); }
-body:is(#category, #manufacturer) .b2b-product-actions .st-compare-button.added { color: var(--b2b-primary); border-color: var(--b2b-primary); }
-body:is(#category, #manufacturer) .b2b-product-actions .st-compare-button i { display: none; }
-body:is(#category, #manufacturer) .b2b-product-actions .st-compare-title { display: inline; }
-body:is(#category, #manufacturer) #products a:focus-visible, body:is(#category, #manufacturer) button:focus-visible { outline: 3px solid var(--b2b-primary); outline-offset: 3px; }
-body:is(#category, #manufacturer) .b2b-filter-open, body:is(#category, #manufacturer) .b2b-filter-heading, body:is(#category, #manufacturer) .b2b-filter-reset { display: none; }
-@media (min-width: 992px) { body:is(#category, #manufacturer) #js-product-list .products { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (min-width: 1200px) { body:is(#category, #manufacturer) #js-product-list .products { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+/* Catalogue product listings: native filters, four columns at XL (1200px). */
+body:is(#category, #manufacturer, #search) .b2b-listing-header { margin: 0 0 20px; }
+body:is(#category, #manufacturer, #search) .b2b-listing-header h1 { margin: 0; font-size: clamp(24px, 2.5vw, 30px); line-height: 1.25; text-transform: none; }
+body:is(#category, #manufacturer, #search) #js-product-list .products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0 0 24px; }
+body:is(#category, #manufacturer, #search) #js-product-list .products > .product { width: 100%; max-width: none; padding: 0; margin: 0; }
+body:is(#category, #manufacturer, #search) #products .product-miniature { width: 100%; height: 100%; margin: 0; }
+body:is(#category, #manufacturer, #search) #products .thumbnail-container { display: flex; flex-direction: column; width: 100%; height: 100%; margin: 0; padding: 16px; background: #fff; border: 1px solid var(--b2b-border); border-radius: 0; box-shadow: none; }
+body:is(#category, #manufacturer, #search) #products .thumbnail-top { flex-shrink: 0; }
+body:is(#category, #manufacturer, #search) #products .product-thumbnail { display: flex; height: 180px; align-items: center; justify-content: center; margin: 0 0 16px; }
+body:is(#category, #manufacturer, #search) #products .product-thumbnail picture { display: flex; height: 100%; align-items: center; justify-content: center; }
+body:is(#category, #manufacturer, #search) #products .product-thumbnail img { position: static; width: 100%; height: 100%; max-height: 180px; object-fit: contain; }
+body:is(#category, #manufacturer, #search) #products .highlighted-informations { display: none; }
+body:is(#category, #manufacturer, #search) #products .product-description { display: flex; flex-direction: column; flex: 1; position: static; width: 100%; height: auto; padding: 0; background: transparent; text-align: left; }
+body:is(#category, #manufacturer, #search) #products .product-description::after { display: none; }
+body:is(#category, #manufacturer, #search) #products .product-title { margin: 0 0 8px; text-align: left; }
+body:is(#category, #manufacturer, #search) #products .product-title a { display: block; color: var(--b2b-secondary); font-size: 15px; font-weight: 600; line-height: 1.4; text-align: left; text-transform: none; white-space: normal; overflow: visible; text-overflow: clip; }
+body:is(#category, #manufacturer, #search) .b2b-product-reference { margin: 0 0 6px; font-size: 12px; line-height: 1.4; color: var(--b2b-text-muted); overflow-wrap: anywhere; }
+body:is(#category, #manufacturer, #search) .b2b-product-specs { margin: 8px 0 12px; font-size: 12px; line-height: 1.5; }
+body:is(#category, #manufacturer, #search) .b2b-product-specs dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 8px; }
+body:is(#category, #manufacturer, #search) .b2b-product-specs dt { font-weight: 400; color: var(--b2b-text-muted); }
+body:is(#category, #manufacturer, #search) .b2b-product-specs dd { margin: 0; overflow-wrap: anywhere; font-weight: 600; color: var(--b2b-secondary); }
+body:is(#category, #manufacturer, #search) .b2b-product-stock { margin: auto 0 8px; font-size: 12px; line-height: 1.4; color: var(--b2b-text-muted); }
+body:is(#category, #manufacturer, #search) .b2b-stock-available { color: #276b3b; }
+body:is(#category, #manufacturer, #search) #products .product-price-and-shipping { margin: 0 0 4px; text-align: left; }
+body:is(#category, #manufacturer, #search) #products .price { font-size: 18px; line-height: 1.4; color: var(--b2b-primary); white-space: nowrap; }
+body:is(#category, #manufacturer, #search) .b2b-product-actions { display: grid; gap: 8px; margin-top: 8px; }
+body:is(#category, #manufacturer, #search) .b2b-product-actions .btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 44px; padding: 8px; font-size: 13px; font-weight: 600; text-transform: none; border-radius: 0; box-shadow: none; }
+body:is(#category, #manufacturer, #search) .b2b-product-actions .btn-primary { color: #fff; background: var(--b2b-primary); border: 1px solid var(--b2b-primary); }
+body:is(#category, #manufacturer, #search) .b2b-product-actions .compare { position: static; display: block; }
+body:is(#category, #manufacturer, #search) .b2b-product-actions .st-compare-button { color: var(--b2b-secondary); background: #fff; border: 1px solid var(--b2b-border); }
+body:is(#category, #manufacturer, #search) .b2b-product-actions .st-compare-button.added { color: var(--b2b-primary); border-color: var(--b2b-primary); }
+body:is(#category, #manufacturer, #search) .b2b-product-actions .st-compare-button i { display: none; }
+body:is(#category, #manufacturer, #search) .b2b-product-actions .st-compare-title { display: inline; }
+body:is(#category, #manufacturer, #search) #products a:focus-visible, body:is(#category, #manufacturer, #search) button:focus-visible { outline: 3px solid var(--b2b-primary); outline-offset: 3px; }
+body:is(#category, #manufacturer, #search) .b2b-filter-open, body:is(#category, #manufacturer, #search) .b2b-filter-heading, body:is(#category, #manufacturer, #search) .b2b-filter-reset { display: none; }
+@media (min-width: 992px) { body:is(#category, #manufacturer, #search) #js-product-list .products { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { body:is(#category, #manufacturer, #search) #js-product-list .products { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 @media (max-width: 767px) {
-  body:is(#category, #manufacturer) #js-product-list .products { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  body:is(#category, #manufacturer) #products .thumbnail-container { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 14px; }
-  body:is(#category, #manufacturer) #products .product-thumbnail { height: 132px; margin: 0; }
-  body:is(#category, #manufacturer) #products .product-thumbnail img { max-height: 132px; }
-  body:is(#category, #manufacturer) #products .product-title a { font-size: 14px; }
-  body:is(#category, #manufacturer) .b2b-product-actions { grid-column: 1 / -1; }
+  body:is(#category, #manufacturer, #search) #js-product-list .products { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  body:is(#category, #manufacturer, #search) #products .thumbnail-container { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 14px; }
+  body:is(#category, #manufacturer, #search) #products .product-thumbnail { height: 132px; margin: 0; }
+  body:is(#category, #manufacturer, #search) #products .product-thumbnail img { max-height: 132px; }
+  body:is(#category, #manufacturer, #search) #products .product-title a { font-size: 14px; }
+  body:is(#category, #manufacturer, #search) .b2b-product-actions { grid-column: 1 / -1; }
 }
-body:is(#category, #manufacturer).has-compact-filter #products .sort-by-row { display: flex; align-items: stretch; gap: 10px; margin: 0; }
-body:is(#category, #manufacturer).has-compact-filter #products .sort-by-row .sort-by { display: none; }
-body:is(#category, #manufacturer).has-compact-filter #products .products-sort-order { flex: 0 1 auto; width: auto; padding: 0; }
-body:is(#category, #manufacturer).has-compact-filter #products .products-sort-order .select-title { margin: 0; min-height: 44px; }
-body:is(#category, #manufacturer).has-compact-filter .b2b-filter-open { display: block; flex: 0 0 auto; background: #fff; border: 1px solid var(--b2b-border); color: var(--b2b-secondary); min-height: 44px; padding: 8px 16px; font-size: 14px; }
-body:is(#category, #manufacturer).has-compact-filter #amazzing_filter .compact-toggle { display: none; }
-body:is(#category, #manufacturer).has-compact-filter #amazzing_filter { padding: 0; max-width: 420px; }
-body:is(#category, #manufacturer).has-compact-filter.show-filter #amazzing_filter { transform: translateX(0); }
-body:is(#category, #manufacturer).has-compact-filter .b2b-filter-heading { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 10px 16px; border-bottom: 1px solid var(--b2b-border); }
-body:is(#category, #manufacturer) .b2b-filter-close { width: 44px; height: 44px; border: 0; background: transparent; color: var(--b2b-secondary); font-size: 30px; }
-body:is(#category, #manufacturer).has-compact-filter #amazzing_filter .block_content { height: calc(100% - 64px); padding: 12px 16px; }
-body:is(#category, #manufacturer).has-compact-filter #amazzing_filter .af-form { padding-bottom: 130px; }
-body:is(#category, #manufacturer).has-compact-filter #amazzing_filter .btn-holder { right: 0; padding: 12px 16px max(12px, env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid var(--b2b-border); }
-body:is(#category, #manufacturer).has-compact-filter .b2b-filter-reset { display: block; width: 100%; min-height: 36px; margin-bottom: 8px; color: var(--b2b-secondary); background: #fff; border: 1px solid var(--b2b-border); }
-body:is(#category, #manufacturer).has-compact-filter .viewFilteredProducts { min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 4px; color: #fff; text-transform: none; }
+body:is(#category, #manufacturer, #search).has-compact-filter #products .sort-by-row { display: flex; align-items: stretch; gap: 10px; margin: 0; }
+body:is(#category, #manufacturer, #search).has-compact-filter #products .sort-by-row .sort-by { display: none; }
+body:is(#category, #manufacturer, #search).has-compact-filter #products .products-sort-order { flex: 0 1 auto; width: auto; padding: 0; }
+body:is(#category, #manufacturer, #search).has-compact-filter #products .products-sort-order .select-title { margin: 0; min-height: 44px; }
+body:is(#category, #manufacturer, #search).has-compact-filter .b2b-filter-open { display: block; flex: 0 0 auto; background: #fff; border: 1px solid var(--b2b-border); color: var(--b2b-secondary); min-height: 44px; padding: 8px 16px; font-size: 14px; }
+body:is(#category, #manufacturer, #search).has-compact-filter #amazzing_filter .compact-toggle { display: none; }
+body:is(#category, #manufacturer, #search).has-compact-filter #amazzing_filter { padding: 0; max-width: 420px; }
+body:is(#category, #manufacturer, #search).has-compact-filter.show-filter #amazzing_filter { transform: translateX(0); }
+body:is(#category, #manufacturer, #search).has-compact-filter .b2b-filter-heading { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 10px 16px; border-bottom: 1px solid var(--b2b-border); }
+body:is(#category, #manufacturer, #search) .b2b-filter-close { width: 44px; height: 44px; border: 0; background: transparent; color: var(--b2b-secondary); font-size: 30px; }
+body:is(#category, #manufacturer, #search).has-compact-filter #amazzing_filter .block_content { height: calc(100% - 64px); padding: 12px 16px; }
+body:is(#category, #manufacturer, #search).has-compact-filter #amazzing_filter .af-form { padding-bottom: 130px; }
+body:is(#category, #manufacturer, #search).has-compact-filter #amazzing_filter .btn-holder { right: 0; padding: 12px 16px max(12px, env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid var(--b2b-border); }
+body:is(#category, #manufacturer, #search).has-compact-filter .b2b-filter-reset { display: block; width: 100%; min-height: 36px; margin-bottom: 8px; color: var(--b2b-secondary); background: #fff; border: 1px solid var(--b2b-border); }
+body:is(#category, #manufacturer, #search).has-compact-filter .viewFilteredProducts { min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 4px; color: #fff; text-transform: none; }
 
-body:is(#category, #manufacturer) .b2b-product-specs dl { margin: 0; }
-body:is(#category, #manufacturer) .b2b-product-specs dl > div { padding: 3px 0; gap: 2px 8px; border-bottom: 1px solid #f0f1f2; }
-body:is(#category, #manufacturer) .b2b-product-specs dt { flex: 1 1 60%; }
-body:is(#category, #manufacturer) .b2b-product-specs dd { max-width: 100%; }
-body:is(#category, #manufacturer) .b2b-product-specs summary { margin-top: 8px; color: var(--b2b-secondary); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
-body:is(#category, #manufacturer) .b2b-product-specs details[open] dl { margin-top: 8px; }
-body:is(#category, #manufacturer) #products .product-price-and-shipping { margin-top: auto; }
-body:is(#category, #manufacturer) .b2b-category-grid { margin-bottom: 24px; }
-body:is(#category, #manufacturer) .b2b-category-description { margin-top: 12px; }
+body:is(#category, #manufacturer, #search) .b2b-product-specs dl { margin: 0; }
+body:is(#category, #manufacturer, #search) .b2b-product-specs dl > div { padding: 3px 0; gap: 2px 8px; border-bottom: 1px solid #f0f1f2; }
+body:is(#category, #manufacturer, #search) .b2b-product-specs dt { flex: 1 1 60%; }
+body:is(#category, #manufacturer, #search) .b2b-product-specs dd { max-width: 100%; }
+body:is(#category, #manufacturer, #search) .b2b-product-specs summary { margin-top: 8px; color: var(--b2b-secondary); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+body:is(#category, #manufacturer, #search) .b2b-product-specs details[open] dl { margin-top: 8px; }
+body:is(#category, #manufacturer, #search) #products .product-price-and-shipping { margin-top: auto; }
+body:is(#category, #manufacturer, #search) .b2b-category-grid { margin-bottom: 24px; }
+body:is(#category, #manufacturer, #search) .b2b-category-description { margin-top: 12px; }
+
+/* Search results share the B2B catalogue presentation and provide a useful
+ * recovery path for both an empty query and a query without matches. */
+body#search .b2b-search-header h1 span {
+  font-weight: 600;
+}
+
+body#search .b2b-search-header p {
+  margin: 8px 0 0;
+  color: var(--b2b-text-muted);
+}
+
+body#search #wrapper .row:has(.b2b-search-empty) > #left-column {
+  display: none;
+}
+
+body#search #content-wrapper:has(.b2b-search-empty) {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+body#search .page-not-found {
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--b2b-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body#search .b2b-search-empty h2 {
+  margin: 0 0 10px;
+  color: var(--b2b-secondary);
+  font-size: clamp(20px, 2.5vw, 26px);
+  line-height: 1.3;
+  text-transform: none;
+}
+
+body#search .b2b-search-empty > p {
+  max-width: 54rem;
+  margin: 0;
+  color: var(--b2b-text-muted);
+  line-height: 1.6;
+}
+
+body#search .b2b-search-retry {
+  max-width: 44rem;
+  margin-top: 24px;
+}
+
+body#search .b2b-search-retry > label {
+  margin-bottom: 8px;
+  color: var(--b2b-secondary);
+  font-weight: 600;
+}
+
+body#search .b2b-search-retry-control {
+  display: flex;
+  width: 100%;
+}
+
+body#search .b2b-search-retry-control .form-control {
+  min-width: 0;
+  height: 46px;
+  border: 1px solid var(--b2b-border);
+  border-radius: 0;
+}
+
+body#search .b2b-search-retry-control .form-control:focus {
+  border-color: var(--b2b-primary);
+  box-shadow: 0 0 0 3px rgba(227, 17, 24, 0.16);
+}
+
+body#search .b2b-search-retry-control .btn {
+  min-width: 7rem;
+  min-height: 46px;
+  border-radius: 0;
+  text-transform: none;
+}
+
+body#search .b2b-search-help {
+  padding-top: 18px;
+  margin-top: 24px !important;
+  border-top: 1px solid var(--b2b-border);
+}
+
+body#search .b2b-search-help a {
+  color: var(--b2b-primary);
+  font-weight: 600;
+}
+
+/* Parent category totals supplied by the filter module exclude their child
+ * branches and can therefore display a misleading zero. Child counts remain. */
+body:is(#category, #manufacturer, #search) #amazzing_filter .af-parent-category > label > .count {
+  display: none;
+}
+
+@media (max-width: 575px) {
+  body#search .page-not-found {
+    padding: 18px;
+  }
+
+  body#search .b2b-search-retry-control {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  body#search .b2b-search-retry-control .btn {
+    width: 100%;
+  }
+}
 
 /* The sort trigger and its menu share the same containing block on all lists. */
 .products-sort-order .b2b-sort-control {

@@ -15,7 +15,7 @@
   data-empty-text="Товарів не знайдено."
   data-error-text="Пошук тимчасово недоступний."
   data-view-all-text="Переглянути всі результати"
-  data-results-text="Знайдено товарів: %count%"
+  data-results-text="Показано підказок: %count%"
 >
   <button
     class="b2b-search-toggle"
@@ -43,9 +43,11 @@
       class="b2b-search-input"
       type="search"
       name="s"
-      value="{$search_query|escape:'htmlall':'UTF-8'}"
+      value="{if isset($search_string)}{$search_string|escape:'htmlall':'UTF-8'}{/if}"
+      role="combobox"
       placeholder="{l s='Name, reference or brand' d='Shop.Theme.Catalog'}"
       aria-autocomplete="list"
+      aria-haspopup="listbox"
       aria-controls="b2b-search-results"
       aria-expanded="false"
       autocapitalize="off"

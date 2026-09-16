@@ -390,6 +390,14 @@
       let requestController = null;
       let requestTimer = null;
 
+      form.addEventListener('submit', (event) => {
+        if (!input.value.trim()) {
+          event.preventDefault();
+          setExpanded(false);
+          input.focus();
+        }
+      });
+
       const getOptions = () => Array.from(results.querySelectorAll('[role="option"]'));
 
       const setExpanded = (expanded) => {

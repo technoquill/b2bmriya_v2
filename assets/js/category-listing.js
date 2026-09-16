@@ -1,7 +1,7 @@
-/* Presentation adapters for category and brand listings; filtering and commerce remain native. */
+/* Presentation adapters for catalogue listings; filtering and commerce remain native. */
 (() => {
   const initialize = () => {
-    if (!['category', 'manufacturer'].includes(document.body.id)) return;
+    if (!['category', 'manufacturer', 'search'].includes(document.body.id)) return;
     const filter = document.getElementById('amazzing_filter');
     const content = document.getElementById('content-wrapper');
     const strings = document.getElementById('b2b-listing-i18n')?.dataset;
@@ -11,13 +11,31 @@
     const setText = (element, text) => {
       if (element && element.textContent !== text) element.textContent = text;
     };
-    const toggle = () => filter?.querySelector('.compact-toggle')?.click();
+    const toggle = () => {
+      if (window.af && typeof window.af.toggleSidePanel === 'function') {
+        window.af.toggleSidePanel();
+      } else {
+        filter?.querySelector('.compact-toggle')?.click();
+      }
+    };
     const sync = () => {
       scheduled = false;
       const compact = !!filter && document.body.classList.contains('has-compact-filter');
       const open = compact && document.body.classList.contains('show-filter');
       const sort = content.querySelector('.sort-by-row');
       if (filter) {
+        const localizedFilterNames = {
+          c: strings.categories,
+          p: strings.price,
+          m: strings.manufacturers,
+        };
+        filter.querySelectorAll('.af_filter[data-key]').forEach((filterGroup) => {
+          const localizedName = localizedFilterNames[filterGroup.dataset.key];
+          if (localizedName) setText(filterGroup.querySelector('.af_subtitle'), localizedName);
+        });
+        filter.querySelectorAll('.af-parent-category > label > .count').forEach((count) => {
+          count.hidden = true;
+        });
         if (sort && !sort.querySelector('.b2b-filter-open')) {
           const button = document.createElement('button');
           button.type = 'button';
