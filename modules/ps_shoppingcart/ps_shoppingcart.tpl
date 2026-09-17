@@ -19,7 +19,7 @@
       aria-label="{l s='Shopping cart link containing %nbProducts% product(s)' sprintf=['%nbProducts%' => $cart.products_count] d='Shop.Theme.Checkout'}"
     >
       <i class="material-icons" aria-hidden="true">shopping_basket</i>
-      <span class="cart-products-counthome">{$cart.products_count}</span>
+      <span class="cart-products-counthome{if $cart.products_count <= 0} is-empty{/if}">{$cart.products_count}</span>
       <span class="hidden-sm-down b2b-cart-label">{l s='Cart' d='Shop.Theme.Checkout'}</span>
     </a>
 
@@ -98,14 +98,14 @@
         </div>
 
         <div class="b2b-mini-cart-actions">
-          <a class="btn btn-secondary" href="{$cart_url}" rel="nofollow">{l s='View Cart' d='Shop.Theme.Global'}</a>
-          <a class="btn btn-primary" href="{$urls.pages.order}" rel="nofollow">{l s='Checkout' d='Shop.Theme.Actions'}</a>
+          <a class="btn btn-secondary" href="{$cart_url}" rel="nofollow">Переглянути</a>
+          <a class="btn btn-primary" href="{$urls.pages.order}" rel="nofollow">Оформити</a>
         </div>
       {else}
         <div class="b2b-mini-cart-empty">
           <i class="material-icons" aria-hidden="true">remove_shopping_cart</i>
-          <p>{l s='There are no items in your cart' d='Shop.Theme.Checkout'}</p>
-          <a class="btn btn-primary" href="{$urls.pages.index}">{l s='Continue shopping' d='Shop.Theme.Actions'}</a>
+          <p>У кошику немає товарів</p>
+          <a class="btn btn-primary" href="{$urls.pages.index}">Продовжити покупки</a>
         </div>
       {/if}
     </aside>

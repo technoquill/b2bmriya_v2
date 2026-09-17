@@ -1035,6 +1035,12 @@ body#product #main .b2b-product-secondary-actions .dropdown-menu {
   z-index: 1040;
 }
 
+.st-modal-compare .modal-title .btn,
+.st-modal-compare .modal-title .btn:hover,
+.st-modal-compare .modal-title .btn:focus {
+  color: #fff;
+}
+
 body#product #main .blockreassurance_product {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2923,6 +2929,14 @@ a:focus {
   line-height: 1;
   background: var(--b2b-primary);
   border-radius: 999px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+#header .cart-products-counthome.is-empty,
+#header .ap-total-wishlist.is-empty,
+#header .ap-total-compare.is-empty {
+  color: #dfe3e8;
+  background: #62666c;
 }
 
 .header-top-main.fixed {
@@ -3056,12 +3070,20 @@ body.b2b-panel-open {
   color: var(--b2b-text-muted);
 }
 
-.b2b-mini-cart-product .remove-from-cart {
+#b2b-mini-cart .b2b-mini-cart-product .remove-from-cart {
   color: var(--b2b-text-muted);
+  transition: color 0.3s ease;
 }
 
-.b2b-mini-cart-product .remove-from-cart:hover {
-  color: var(--b2b-primary);
+#b2b-mini-cart .b2b-mini-cart-product .remove-from-cart .material-icons {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+#b2b-mini-cart .b2b-mini-cart-product .remove-from-cart:hover,
+#b2b-mini-cart .b2b-mini-cart-product .remove-from-cart:focus,
+#b2b-mini-cart .b2b-mini-cart-product .remove-from-cart:focus-visible {
+  color: var(--b2b-primary) !important;
 }
 
 .b2b-mini-cart-summary {
@@ -3126,6 +3148,18 @@ body.b2b-panel-open {
 .b2b-mini-cart-empty > .material-icons {
   color: var(--b2b-text-muted);
   font-size: 4rem;
+}
+
+#b2b-mini-cart .b2b-mini-cart-empty .btn {
+  color: #fff !important;
+  text-transform: none !important;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#b2b-mini-cart .b2b-mini-cart-empty .btn:hover,
+#b2b-mini-cart .b2b-mini-cart-empty .btn:focus,
+#b2b-mini-cart .b2b-mini-cart-empty .btn:focus-visible {
+  color: #fff !important;
 }
 
 #blockcart-modal .cart-content-btn .btn-primary,
@@ -4666,3 +4700,113 @@ body:is(#category, #manufacturer) .b2b-category-description { margin-top: 12px; 
 /* Override Classic's flex layout for the brand directory. */
 body#manufacturer #main > .b2b-category-grid { display: grid; }
 body#manufacturer .b2b-category-grid > li { width: auto; margin: 0; padding: 0; }
+
+/* Breadcrumbs: keep the visible trail concise, navigable and readable. */
+#wrapper .breadcrumb {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  color: var(--b2b-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  overflow-wrap: normal;
+  background: transparent;
+}
+
+#wrapper .breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper .breadcrumb li {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  color: var(--b2b-text-muted);
+}
+
+#wrapper .breadcrumb li::after {
+  margin: 0 0.625rem;
+  color: #8a8e93;
+  content: "\203A";
+}
+
+#wrapper .breadcrumb li:last-child::after {
+  margin: 0;
+  content: "";
+}
+
+#wrapper .breadcrumb li a {
+  color: var(--b2b-secondary);
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+}
+
+#wrapper .breadcrumb .b2b-breadcrumb-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+#wrapper .breadcrumb .b2b-breadcrumb-home .material-icons {
+  width: 1em;
+  height: 1em;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+#wrapper .breadcrumb li a:hover,
+#wrapper .breadcrumb li a:focus-visible {
+  color: var(--b2b-primary);
+  text-decoration: underline;
+}
+
+#wrapper .breadcrumb li a:focus-visible {
+  outline: 2px solid var(--b2b-primary);
+  outline-offset: 3px;
+}
+
+#wrapper .breadcrumb li > span,
+#wrapper .breadcrumb li a > span {
+  overflow-wrap: break-word;
+}
+
+body#product #wrapper .breadcrumb ol {
+  flex-wrap: nowrap;
+}
+
+body#product #wrapper .breadcrumb li {
+  flex: 0 0 auto;
+}
+
+body#product #wrapper .breadcrumb li:last-child {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+body#product #wrapper .breadcrumb li:last-child > span {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 575px) {
+  #wrapper .breadcrumb {
+    margin-bottom: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  #wrapper .b2b-product-breadcrumb--compact li:not(:first-child):not(:nth-last-child(-n + 2)) {
+    display: none;
+  }
+
+  #wrapper .b2b-product-breadcrumb--compact li:first-child::after {
+    margin: 0 0.5rem;
+    content: "\203A  \2026  \203A";
+  }
+}
