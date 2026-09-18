@@ -179,7 +179,7 @@ theme_settings:
     index: layout-full-width
     product: layout-full-width
     category: layout-left-column
-    cart: layout-left-column
+    cart: layout-full-width
     checkout: layout-full-width
     contact: layout-left-column
     module-stfeature-productscompare: layout-full-width

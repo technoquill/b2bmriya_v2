@@ -1417,6 +1417,28 @@ body#product #main .product-accessories > .h5 {
   display: none;
 }
 
+/* Classic lays out .images-container as a horizontal flex row in quick view.
+ * The B2B gallery has its own stage + horizontal thumbnail strip, so restore
+ * its intended vertical flow and keep both parts inside the media column. */
+.quickview .b2b-product-gallery {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.quickview .b2b-gallery-stage {
+  height: clamp(15rem, 30vw, 18.75rem);
+  aspect-ratio: auto;
+}
+
+.quickview .b2b-gallery-navigation,
+.quickview .b2b-gallery-mask {
+  width: 100%;
+  min-width: 0;
+}
+
 .quickview .b2b-gallery-cover-button {
   cursor: default;
 }
