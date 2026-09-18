@@ -3633,8 +3633,10 @@ body.b2b-panel-open {
 #footer {
   clear: both;
   padding-top: 0;
+  margin-top: 0;
   color: #fff;
   background: var(--b2b-secondary);
+  border-top: 4rem solid #f5f5f5;
 }
 
 #footer .footer-container {
